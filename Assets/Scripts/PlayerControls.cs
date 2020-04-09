@@ -1,39 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Rewired;
 
 public class PlayerControls : MonoBehaviour
 {
     [Header("Input")]
-    Player inputHandler = null; //Represents a player to which a controller is assigned
+    Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
+    //Parameters that the player cares about, directly affects user experience
     [Header("Gameplay Parameters")]
     [SerializeField] float moveAcceleration = 0;
     [SerializeField] float maxMoveSpeed = 0;
     [SerializeField] float jumpForce = 0;
-    [SerializeField] float terminalVelocity = 0;
+    [SerializeField] float gravity = 0;
+    [Tooltip("Buffer on each side of each BoxCast to smooth out collision detection.")]
+    [SerializeField] float cornerCollisionBuffer = 0;
 
+    //Affects the physics response to other objects
     [Header("Physics")]
     [SerializeField] Rigidbody2D rBody = null;
     [SerializeField] BoxCollider2D boxCollider = null;
     [Space(10)]
     [SerializeField] [ReadOnlyField] bool grounded = true;
     [SerializeField] [ReadOnlyField] Vector2 velocity = Vector2.zero;
-    [SerializeField] float gravity = 0;
     [SerializeField] float groundDrag = 0;
+    [SerializeField] float terminalVelocity = 0;
     [SerializeField] ContactFilter2D contactFilter = new ContactFilter2D();
-    [Tooltip("Buffer on each side of each BoxCast to smooth out collision detection.")]
-    [SerializeField] float cornerCollisionBuffer = 0;
     enum BoxCastDirection { LEFT, RIGHT, UP, DOWN };
     //Cached array for containing hit results from RayCasts/BoxCasts
     RaycastHit2D[] castResults = new RaycastHit2D[1];
 
+    [Header("Animation")]
+    [SerializeField] Transform sprite = null;
+    //[SerializeField] [ReadOnlyField] bool facingRight = true;
+
     void Awake()
     {
-        //Assigns the main input handler to player 0, since there will only be one player.
-        inputHandler = ReInput.players.GetPlayer(0);
-        Application.targetFrameRate = 60;
+        //Assigns the main input handler to player 0, since there will only be one player
+        inputHandler = Rewired.ReInput.players.GetPlayer(0);
     }
 
     void Update()
@@ -44,7 +48,18 @@ public class PlayerControls : MonoBehaviour
         {
             Jump();
         }
+        if (inputHandler.GetAxis("Move") > 0)
+        {
+            //facingRight = true;
+            sprite.localScale = Vector3.one;
+        }
+        if (inputHandler.GetAxis("Move") < 0)
+        {
+            //facingRight = false;
+            sprite.localScale = new Vector3(-1, 1, 1);
+        }
     }
+
     void FixedUpdate()
     {
         ApplyLocomotion();
@@ -59,7 +74,10 @@ public class PlayerControls : MonoBehaviour
     {
         velocity.y -= gravity * Time.deltaTime;
 
-        velocity.x += inputHandler.GetAxisRaw("Move") * moveAcceleration * Time.deltaTime;
+        if (inputHandler.GetAxis("Move") != 0)
+        {
+            Move();
+        }
     }
 
     void ApplyConstraints()
@@ -147,6 +165,16 @@ public class PlayerControls : MonoBehaviour
     #endregion
 
     #region Player Input Actions
+
+    void Move()
+    {
+        velocity.x += inputHandler.GetAxis("Move") * moveAcceleration * Time.deltaTime;
+    }
+
+    public void AddForce(Vector2 force)
+    {
+        velocity += force;
+    }
 
     void Jump()
     {
