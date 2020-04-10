@@ -3035,19 +3035,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1609914140, guid: 174b7d53194e28f4b82ccc2a0e620a09, type: 3}
-      propertyPath: bulletTypes.Array.data[0].name
-      value: Standard Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 1609914140, guid: 174b7d53194e28f4b82ccc2a0e620a09, type: 3}
-      propertyPath: bulletTypes.Array.data[0].bulletPrefab
-      value: 
-      objectReference: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
-        type: 3}
-    - target: {fileID: 1609914140, guid: 174b7d53194e28f4b82ccc2a0e620a09, type: 3}
-      propertyPath: bulletTypes.Array.data[0].speed
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1682132973830369170, guid: 174b7d53194e28f4b82ccc2a0e620a09,
         type: 3}
       propertyPath: m_Name
@@ -3108,10 +3095,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1682132973830369174, guid: 174b7d53194e28f4b82ccc2a0e620a09,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 1598bc840ed9db846b2f3c4261f0e5b4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174b7d53194e28f4b82ccc2a0e620a09, type: 3}

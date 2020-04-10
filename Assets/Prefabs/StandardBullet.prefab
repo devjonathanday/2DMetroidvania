@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 2484318114415172858, guid: 5fa08aaa73f9bb74caa9937ff7fc7dcc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,7 +133,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  destroyEffect: {fileID: 0}
+  destroyEffect: {fileID: 7401300057011660861, guid: 789f4711275b0624cbd5d428f2b314f5,
+    type: 3}
 --- !u!50 &-8416678343666869606
 Rigidbody2D:
   serializedVersion: 4

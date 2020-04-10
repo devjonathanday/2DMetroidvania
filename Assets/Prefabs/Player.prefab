@@ -116,8 +116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 31329603}
-  standardBullet: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
-    type: 3}
+  bulletTypes:
+  - name: Standard Bullet
+    bulletPrefab: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
+      type: 3}
+    speed: 10
+  currentBullet: 0
 --- !u!61 &1682132973830369173
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -160,7 +164,7 @@ Rigidbody2D:
   m_LinearDrag: 1000000
   m_AngularDrag: 1000000
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1598bc840ed9db846b2f3c4261f0e5b4, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
@@ -236,7 +240,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1177097601992437502, guid: 43d893986a5943146bdfcd1f2f3751de,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
