@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
+    [SerializeField] PlayerManager playerManager = null;
+
     [Header("Input")]
     Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
@@ -20,6 +22,7 @@ public class PlayerAbilities : MonoBehaviour
         public string name = null;
         public GameObject bulletPrefab = null;
         public float speed;
+        public float spawnOffset;
     }
 
     void Awake()
@@ -38,8 +41,10 @@ public class PlayerAbilities : MonoBehaviour
 
     void Shoot()
     {
-        GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab, firePoint.position, Quaternion.identity);
-        spawnedBullet.transform.localScale = firePoint.localScale;
-        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * bulletTypes[currentBullet].speed);
+        GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab,
+                                               firePoint.position + (Vector3.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
+                                               Quaternion.identity);
+        spawnedBullet.transform.localScale = firePoint.lossyScale;
+        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    [SerializeField] PlayerManager playerManager = null;
+
     [Header("Input")]
     Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
@@ -31,8 +33,8 @@ public class PlayerControls : MonoBehaviour
     RaycastHit2D[] castResults = new RaycastHit2D[1];
 
     [Header("Animation")]
+    [SerializeField] Animator animator = null;
     [SerializeField] Transform sprite = null;
-    //[SerializeField] [ReadOnlyField] bool facingRight = true;
 
     void Awake()
     {
@@ -50,14 +52,15 @@ public class PlayerControls : MonoBehaviour
         }
         if (inputHandler.GetAxis("Move") > 0)
         {
-            //facingRight = true;
+            playerManager.facingRight = true;
             sprite.localScale = Vector3.one;
         }
         if (inputHandler.GetAxis("Move") < 0)
         {
-            //facingRight = false;
+            playerManager.facingRight = false;
             sprite.localScale = new Vector3(-1, 1, 1);
         }
+        UpdateAnimations();
     }
 
     void FixedUpdate()
@@ -179,6 +182,17 @@ public class PlayerControls : MonoBehaviour
     void Jump()
     {
         velocity.y = jumpForce;
+    }
+
+    #endregion
+
+    #region Animation
+
+    void UpdateAnimations()
+    {
+        animator.SetFloat("SpeedX", Mathf.Abs(velocity.x));
+        animator.SetFloat("SpeedY", velocity.y);
+        animator.SetBool("Grounded", grounded);
     }
 
     #endregion
