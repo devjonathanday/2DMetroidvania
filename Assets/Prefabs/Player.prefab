@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
+  jumpSFX: {fileID: 0}
+  landSFX: {fileID: 0}
 --- !u!114 &1682132973830369175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +141,7 @@ MonoBehaviour:
       type: 3}
     speed: 10
     spawnOffset: 0
+    shootSFX: {fileID: 0}
   currentBullet: 0
 --- !u!61 &1682132973830369173
 BoxCollider2D:
@@ -256,9 +259,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -670097205
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1177097601992437502, guid: 43d893986a5943146bdfcd1f2f3751de,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

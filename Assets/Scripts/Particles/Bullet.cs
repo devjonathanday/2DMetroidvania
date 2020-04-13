@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [Header("Gameplay")]
+    [SerializeField] LayerMask specialCollisionLayers = new LayerMask();
+    [SerializeField] float lifeTime = 0;
+    float spawnTimestamp = 0;
+
     [Header("Physics")]
     [SerializeField] Rigidbody2D rBody = null;
     [SerializeField] [ReadOnlyField] Vector2 velocity = Vector2.zero;
@@ -17,6 +22,15 @@ public class Bullet : MonoBehaviour
     public void Initialize(Vector2 _velocity)
     {
         velocity = _velocity;
+        spawnTimestamp = Time.time;
+    }
+
+    void Update()
+    {
+        if(Time.time - spawnTimestamp >= lifeTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
@@ -35,11 +49,26 @@ public class Bullet : MonoBehaviour
         if(Physics2D.Raycast(rBody.position, velocity, contactFilter, castResults, velocity.magnitude) > 0)
         {
             rBody.position = castResults[0].point;
-            Destroy();
+
+            //If we hit an object that should react to the bullet
+            if(((1 << castResults[0].collider.gameObject.layer) & specialCollisionLayers) != 0)
+                CheckSpecial(castResults[0]);
+
+            Terminate();
         }
     }
 
-    void Destroy()
+    void CheckSpecial(RaycastHit2D result)
+    {
+        //Check if we hit a door, then attempt to open it
+        Door doorHit = result.collider.gameObject.GetComponent<Door>();
+        if (doorHit != null)
+        {
+            doorHit.Open();
+        }
+    }
+
+    void Terminate()
     {
         if(destroyEffect != null)
             Instantiate(destroyEffect, rBody.position, Quaternion.identity);

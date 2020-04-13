@@ -117,6 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9686befce2235499a1ef986c1dee8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 8192
+  lifeTime: 2
   rBody: {fileID: -8416678343666869606}
   velocity: {x: 0, y: 0}
   contactFilter:
@@ -128,7 +132,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 512
+      m_Bits: 8704
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

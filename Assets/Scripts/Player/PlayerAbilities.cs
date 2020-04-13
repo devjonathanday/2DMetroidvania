@@ -21,8 +21,9 @@ public class PlayerAbilities : MonoBehaviour
     {
         public string name = null;
         public GameObject bulletPrefab = null;
-        public float speed;
-        public float spawnOffset;
+        public float speed = 0;
+        public float spawnOffset = 0;
+        public AudioClip shootSFX = null;
     }
 
     void Awake()
@@ -46,5 +47,9 @@ public class PlayerAbilities : MonoBehaviour
                                                Quaternion.identity);
         spawnedBullet.transform.localScale = firePoint.lossyScale;
         spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed);
+        if(bulletTypes[currentBullet].shootSFX != null)
+        {
+            GlobalAudio.instance.PlayOneShot(bulletTypes[currentBullet].shootSFX);
+        }
     }
 }
