@@ -88,7 +88,7 @@ public class PlayerAbilities : MonoBehaviour
     void Shoot()
     {
         GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab,
-                                               firePoint.position + (firePoint.right * bulletTypes[currentBullet].spawnOffset),
+                                               firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
                                                Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(inputHandler.GetAxis("AimY"), inputHandler.GetAxis("AimX"))));
         //spawnedBullet.transform.localScale = firePoint.lossyScale;
         spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed);
