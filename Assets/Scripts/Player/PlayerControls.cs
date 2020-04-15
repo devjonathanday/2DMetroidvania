@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -17,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float gravity = 0;
     [Tooltip("Buffer on each side of each BoxCast to smooth out collision detection.")]
     [SerializeField] float cornerCollisionBuffer = 0;
+    bool jumpReleased = true;
 
     //Affects the physics response to other objects
     [Header("Physics")]
@@ -36,6 +35,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] Animator animator = null;
     [SerializeField] Transform sprite = null;
 
+    [Header("Audio")]
+    [SerializeField] float landSFXMinVelocity = 0;
+
     void Awake()
     {
         //Assigns the main input handler to player 0, since there will only be one player
@@ -49,17 +51,28 @@ public class PlayerControls : MonoBehaviour
         if (grounded && inputHandler.GetButtonDown("Jump"))
         {
             Jump();
+            jumpReleased = false;
         }
-        if (inputHandler.GetAxis("Move") > 0)
+        if (inputHandler.GetButtonUp("Jump") && !jumpReleased && velocity.y > 0)
         {
-            playerManager.facingRight = true;
+            velocity.y /= 2;
+            jumpReleased = true;
+        }
+
+        //If we are not aiming
+        if (inputHandler.GetAxis("AimX") == 0 && inputHandler.GetAxis("AimY") == 0)
+        {
+            //Aim the player based on their movement instead
+            if (inputHandler.GetAxis("Move") < 0)
+                playerManager.facingRight = false;
+            if (inputHandler.GetAxis("Move") > 0)
+                playerManager.facingRight = true;
+        }
+
+        if (playerManager.facingRight == true)
             sprite.localScale = Vector3.one;
-        }
-        if (inputHandler.GetAxis("Move") < 0)
-        {
-            playerManager.facingRight = false;
-            sprite.localScale = new Vector3(-1, 1, 1);
-        }
+        else sprite.localScale = new Vector3(-1, 1, 1);
+
         UpdateAnimations();
     }
 
@@ -117,7 +130,7 @@ public class PlayerControls : MonoBehaviour
                     {
                         if (castResults[0].point.x < boxCollider.bounds.center.x)
                         {
-                            rBody.position = new Vector2(castResults[0].point.x + (boxCollider.bounds.extents.x), rBody.position.y);
+                            rBody.position = new Vector2(castResults[0].point.x + boxCollider.bounds.extents.x, rBody.position.y);
                             velocity.x = 0;
                         }
                     }
@@ -130,7 +143,7 @@ public class PlayerControls : MonoBehaviour
                     {
                         if (castResults[0].point.x > boxCollider.bounds.center.x)
                         {
-                            rBody.position = new Vector2(castResults[0].point.x - (boxCollider.bounds.extents.x), rBody.position.y);
+                            rBody.position = new Vector2(castResults[0].point.x - boxCollider.bounds.extents.x, rBody.position.y);
                             velocity.x = 0;
                         }
                     }
@@ -143,7 +156,7 @@ public class PlayerControls : MonoBehaviour
                     {
                         if (castResults[0].point.y > boxCollider.bounds.center.y)
                         {
-                            rBody.position = new Vector2(rBody.position.x, castResults[0].point.y - (boxCollider.bounds.extents.y));
+                            rBody.position = new Vector2(rBody.position.x, castResults[0].point.y - boxCollider.bounds.extents.y);
                             velocity.y = 0;
                         }
                     }
@@ -156,7 +169,11 @@ public class PlayerControls : MonoBehaviour
                     {
                         if (castResults[0].point.y < boxCollider.bounds.center.y)
                         {
-                            rBody.position = new Vector2(rBody.position.x, castResults[0].point.y + (boxCollider.bounds.extents.y));
+                            rBody.position = new Vector2(rBody.position.x, castResults[0].point.y + boxCollider.bounds.extents.y);
+
+                            if (velocity.y < -landSFXMinVelocity)
+                                GlobalAudio.instance.PlayOneShot(playerManager.landSFX);
+
                             velocity.y = 0;
                         }
                     }
@@ -182,6 +199,7 @@ public class PlayerControls : MonoBehaviour
     void Jump()
     {
         velocity.y = jumpForce;
+        GlobalAudio.instance.PlayOneShot(playerManager.jumpSFX);
     }
 
     #endregion

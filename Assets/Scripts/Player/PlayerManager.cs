@@ -8,6 +8,6 @@ public class PlayerManager : MonoBehaviour
     [ReadOnlyField] public bool facingRight = true;
 
     [Header("Audio")]
-    public AudioSource jumpSFX;
-    public AudioSource landSFX;
+    public AudioClip jumpSFX = null;
+    public AudioClip landSFX = null;
 }
