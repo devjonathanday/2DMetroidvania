@@ -5,6 +5,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] PlayerManager playerManager = null;
 
     [Header("Input")]
+    [SerializeField] float movementDeadzone = 0;
     Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
     //Parameters that the player cares about, directly affects user experience
@@ -63,9 +64,9 @@ public class PlayerControls : MonoBehaviour
         if (inputHandler.GetAxis("AimX") == 0 && inputHandler.GetAxis("AimY") == 0)
         {
             //Aim the player based on their movement instead
-            if (inputHandler.GetAxis("Move") < 0)
+            if (inputHandler.GetAxis("Move") < -movementDeadzone)
                 playerManager.facingRight = false;
-            if (inputHandler.GetAxis("Move") > 0)
+            if (inputHandler.GetAxis("Move") > movementDeadzone)
                 playerManager.facingRight = true;
         }
 
@@ -90,7 +91,7 @@ public class PlayerControls : MonoBehaviour
     {
         velocity.y -= gravity * Time.deltaTime;
 
-        if (inputHandler.GetAxis("Move") != 0)
+        if ((!inputHandler.GetButton("Stabilize") || !grounded) && Mathf.Abs(inputHandler.GetAxis("Move")) > movementDeadzone)
         {
             Move();
         }
@@ -102,8 +103,8 @@ public class PlayerControls : MonoBehaviour
         if (velocity.y < -terminalVelocity)
             velocity.y = -terminalVelocity;
 
-        //Slow down the player if they are on the ground and not pressing anything
-        if (grounded && inputHandler.GetAxis("Move") == 0)
+        //Slow down the player if they are on the ground and not pressing anything, or if they are trying to stabilize
+        if (grounded && (Mathf.Abs(inputHandler.GetAxis("Move")) < movementDeadzone || inputHandler.GetButton("Stabilize")))
             velocity.x *= groundDrag;
 
         //Max horizontal movement speed
