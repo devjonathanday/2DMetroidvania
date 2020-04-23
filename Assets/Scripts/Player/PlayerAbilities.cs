@@ -12,7 +12,8 @@ public class PlayerAbilities : MonoBehaviour
     [Header("Orientation")]
     [SerializeField] Transform firePoint = null;
     [SerializeField] Transform arm = null;
-    [SerializeField] [ReadOnlyField] Vector3 aimDirection = Vector3.zero;
+    [SerializeField] [ReadOnlyField] Vector2 aimInput;
+    [SerializeField] [ReadOnlyField] float aimAngle;
 
     [Header("Cosmetic")]
     [SerializeField] SpriteRenderer headSprite = null;
@@ -45,6 +46,10 @@ public class PlayerAbilities : MonoBehaviour
 
     void Update()
     {
+        aimInput.x = inputHandler.GetAxis("AimX");
+        aimInput.y = inputHandler.GetAxis("AimY");
+        aimInput.Normalize();
+
         Aim();
 
         if (Time.time - fireTimestamp > bulletTypes[currentBullet].fireIncrement)
@@ -61,38 +66,34 @@ public class PlayerAbilities : MonoBehaviour
     void Aim()
     {
         //Rotate arm to face aiming direction
-        if (inputHandler.GetAxis("AimX") != 0 || inputHandler.GetAxis("AimY") != 0)
+        if (aimInput.x > 0)
         {
-            if (inputHandler.GetAxis("AimX") > 0)
-            {
-                playerManager.facingRight = true;
-            }
-            if (inputHandler.GetAxis("AimX") < 0)
-            {
-                playerManager.facingRight = false;
-            }
-
-            aimDirection = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan2(inputHandler.GetAxis("AimY"), Mathf.Abs(inputHandler.GetAxis("AimX"))));
-
-            arm.localEulerAngles = aimDirection;
-
-            UpdateAnimations(false);
+            playerManager.facingRight = true;
         }
-        else
+        else if (aimInput.x < 0)
         {
-            arm.localEulerAngles = Vector3.zero;
-            UpdateAnimations(true);
+            playerManager.facingRight = false;
         }
+        else if(aimInput.x == 0 && aimInput.y == 0)
+        {
+            aimInput = playerManager.facingRight ? Vector2.right : Vector2.left;
+        }
+
+        aimAngle = Mathf.Rad2Deg * Mathf.Atan2(aimInput.y, Mathf.Abs(aimInput.x));
+
+        arm.localEulerAngles = Vector3.forward * aimAngle;
+
+        UpdateAnimations(false);
     }
 
     void Shoot()
     {
         GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab,
                                                firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
-                                               Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(inputHandler.GetAxis("AimY"), inputHandler.GetAxis("AimX"))));
+                                               Quaternion.Euler(Vector3.forward * (Mathf.Rad2Deg * Mathf.Atan2(aimInput.y, aimInput.x))));
         //spawnedBullet.transform.localScale = firePoint.lossyScale;
         spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed);
-        if(bulletTypes[currentBullet].shootSFX != null)
+        if (bulletTypes[currentBullet].shootSFX != null)
         {
             GlobalAudio.instance.PlayOneShot(bulletTypes[currentBullet].shootSFX);
         }
@@ -100,22 +101,14 @@ public class PlayerAbilities : MonoBehaviour
 
     void UpdateAnimations(bool forward)
     {
-        //Change head sprite based on aiming direction
-        if (forward)
+        if (aimInput.y > 0.5f)
         {
-            headSprite.sprite = headForward;
+            headSprite.sprite = headUp;
         }
-        else
+        else if (aimInput.y < -0.5f)
         {
-            if (inputHandler.GetAxis("AimY") > 0.5f)
-            {
-                headSprite.sprite = headUp;
-            }
-            else if (inputHandler.GetAxis("AimY") < -0.5f)
-            {
-                headSprite.sprite = headDown;
-            }
-            else headSprite.sprite = headForward;
+            headSprite.sprite = headDown;
         }
+        else headSprite.sprite = headForward;
     }
 }
