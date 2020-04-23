@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class MapController : MonoBehaviour
 {
-    enum Door
+    public static MapController instance;
+
+    public enum ExitDoor
     {
         Left =  (1 << 0),
         Right = (1 << 1),
@@ -16,10 +18,26 @@ public class MapController : MonoBehaviour
     [System.Serializable]
     public class MapTile
     {
-        bool discovered;
-        int tileBG;
-        Door doors;
+        public bool discovered;
+        public int tileBG;
+        public ExitDoor doors;
     }
 
-    [SerializeField] static List<Texture2D> TileBackgrounds = new List<Texture2D>();
+    public List<Sprite> TileBackgrounds = new List<Sprite>();
+    //ROW-MAJOR
+    public MapTile[,] map;
+
+    void Awake()
+    {
+        //Ensure only one MapController instance exists in the game
+        MapController[] mapControllers = FindObjectsOfType<MapController>();
+        if (mapControllers.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
+        //Assign self as static MapController instance
+        if (instance == null) instance = this;
+    }
 }
