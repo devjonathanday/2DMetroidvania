@@ -35,7 +35,7 @@ public class DevMapDesigner : MonoBehaviour
         {
             for (int k = 0; k < mapHeight; k++) //Iterate through columns
             {
-                DevMapTile newDevMapTile = Instantiate(devMapTile, new Vector3(i * mapTileSize.x, k * mapTileSize.y, 0), Quaternion.identity).GetComponent<DevMapTile>();
+                DevMapTile newDevMapTile = Instantiate(devMapTile, new Vector3(i * mapTileSize.x, -k * mapTileSize.y, 0), Quaternion.identity).GetComponent<DevMapTile>();
                 mapCopy[i, k] = newDevMapTile;
                 newDevMapTile.mapPosX = i;
                 newDevMapTile.mapPosY = k;
@@ -45,6 +45,8 @@ public class DevMapDesigner : MonoBehaviour
 
     void UpdateMapData()
     {
+        MapController.instance.LoadMapData();
+
         for (int i = 0; i < mapWidth; i++) //Iterate through rows
         {
             for (int k = 0; k < mapHeight; k++) //Iterate through columns
@@ -66,7 +68,7 @@ public class DevMapDesigner : MonoBehaviour
         {
             for (int k = 0; k < mapWidth; k++)
             {
-                fileWriter.Write(GetSerializedTile(mapCopy[k, i]));
+                fileWriter.Write(GetSerializedTile(mapCopy[k, i], k < mapWidth - 1));
             }
             //Append a space to the end of each line, except the last
             if (i < mapHeight - 1) fileWriter.Write('\n');
@@ -76,7 +78,7 @@ public class DevMapDesigner : MonoBehaviour
         fileWriter.Close();
     }
 
-    string GetSerializedTile(DevMapTile tile)
+    string GetSerializedTile(DevMapTile tile, bool appendComma)
     {
         string output = string.Empty;
 
@@ -91,7 +93,7 @@ public class DevMapDesigner : MonoBehaviour
         output += tile.doors.HasFlag(MapController.ExitDoor.Up) ? "1" : "0";
         output += tile.doors.HasFlag(MapController.ExitDoor.Down) ? "1" : "0";
 
-        output += ",";
+        if (appendComma) output += ",";
 
         return output;
     }

@@ -12,11 +12,11 @@ public class MapController : MonoBehaviour
     [Flags]
     public enum ExitDoor
     {
-        None  = 0, //0000
-        Left  = 1, //0001
+        None = 0, //0000
+        Left = 1, //0001
         Right = 2, //0010
-        Up    = 4, //0100
-        Down  = 8  //1000
+        Up = 4, //0100
+        Down = 8  //1000
     }
 
     [System.Serializable]
@@ -25,6 +25,13 @@ public class MapController : MonoBehaviour
         public int backgroundID;
         public bool discovered;
         public ExitDoor doors;
+
+        public MapTile()
+        {
+            backgroundID = 0;
+            discovered = false;
+            doors = ExitDoor.None;
+        }
     }
 
     public List<Sprite> TileBackgrounds = new List<Sprite>();
@@ -45,9 +52,26 @@ public class MapController : MonoBehaviour
 
         //Assign self as static MapController instance
         if (instance == null) instance = this;
+
+        map = new MapTile[mapWidth, mapHeight];
     }
 
-    void SaveMapData()
+    //TODO: Before final build, mapData.csv is created, then the final map data pass should be written to it.
+    //This file does not exist after a clean download, this function should only be run if the player has zero save data.
+    public void InitializeMapFile()
+    {
+        string mapDataPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName +
+                             @"\Local\" + Application.productName + @"\mapData.csv";
+
+        StreamWriter fileWriter = File.CreateText(mapDataPath);
+
+        fileWriter.Write("");
+
+        fileWriter.Flush();
+        fileWriter.Close();
+    }
+
+    public void SaveMapData()
     {
         string mapDataPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName +
                              @"\Local\" + Application.productName + @"\mapData.csv";
@@ -60,7 +84,7 @@ public class MapController : MonoBehaviour
         {
             for (int k = 0; k < mapWidth; k++)
             {
-                fileWriter.Write(GetSerializedTile(map[k, i]));
+                fileWriter.Write(GetSerializedTile(map[k, i], k < mapWidth - 1));
             }
             //Append a space to the end of each line, except the last
             if (i < mapHeight - 1) fileWriter.Write('\n');
@@ -69,7 +93,7 @@ public class MapController : MonoBehaviour
         fileWriter.Flush();
         fileWriter.Close();
 
-        string GetSerializedTile(MapTile tile)
+        string GetSerializedTile(MapTile tile, bool appendComma)
         {
             string output = string.Empty;
 
@@ -84,13 +108,13 @@ public class MapController : MonoBehaviour
             output += tile.doors.HasFlag(ExitDoor.Up) ? "1" : "0";
             output += tile.doors.HasFlag(ExitDoor.Down) ? "1" : "0";
 
-            output += ",";
+            if(appendComma) output += ",";
 
             return output;
         }
     }
 
-    void LoadMapData()
+    public void LoadMapData()
     {
         string mapDataPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName +
                              @"\Local\" + Application.productName + @"\mapData.csv";
@@ -102,54 +126,42 @@ public class MapController : MonoBehaviour
         }
         else
         {
-            try
+            //try
+            //{
+            StreamReader fileReader = File.OpenText(mapDataPath);
+
+            //row = iterator for map Y axis
+            //column = iterator for map X axis
+            //chunks = array of each tile in the current row
+
+            int row = 0;
+            string currentLine;
+            while ((currentLine = fileReader.ReadLine()) != null)
             {
-                StreamReader fileReader = File.OpenText(mapDataPath);
-
-                //row = iterator for map Y axis
-                //column = iterator for map X axis
-                //chunks = array of each tile in the current row
-
-                int row = 0;
-                string currentLine;
-                while ((currentLine = fileReader.ReadLine()) != null)
+                string[] chunks = currentLine.Split(',');
+                for (int column = 0; column < chunks.Length; column++)
                 {
-                    string[] chunks = currentLine.Split(',');
-                    for (int column = 0; column < chunks.Length; column++)
-                    {
-                        //Characters 0-1 represent the tile background index
-                        map[column, row].backgroundID = int.Parse(new string(chunks[column][0], chunks[column][1]));
-                        //Character 2 represents discovered status (0 = false, 1 = true)
-                        map[column, row].discovered = (chunks[column][2] == '0' ? false : true);
-                        //Characters 3-6 represent doors in this tile (Left, Right, Up, Down)
-                        if (chunks[column][3] == '1') map[column, row].doors |= ExitDoor.Left;
-                        if (chunks[column][4] == '1') map[column, row].doors |= ExitDoor.Right;
-                        if (chunks[column][5] == '1') map[column, row].doors |= ExitDoor.Up;
-                        if (chunks[column][6] == '1') map[column, row].doors |= ExitDoor.Down;
-                    }
+                    map[column, row] = new MapTile();
+                    //Characters 0-1 represent the tile background index
+                    int backgroundID = int.Parse(new string(chunks[column][0], chunks[column][1]));
+                    map[column, row].backgroundID = backgroundID;
+                    //Character 2 represents discovered status (0 = false, 1 = true)
+                    map[column, row].discovered = (chunks[column][2] == '0' ? false : true);
+                    //Characters 3-6 represent doors in this tile (Left, Right, Up, Down)
+                    if (chunks[column][3] == '1') map[column, row].doors |= ExitDoor.Left;
+                    if (chunks[column][4] == '1') map[column, row].doors |= ExitDoor.Right;
+                    if (chunks[column][5] == '1') map[column, row].doors |= ExitDoor.Up;
+                    if (chunks[column][6] == '1') map[column, row].doors |= ExitDoor.Down;
                 }
+                row++;
+            }
 
-                fileReader.Close();
-            }
-            catch
-            {
-                Debug.Log("Map data file was modified or corrupted, could not load.");
-            }
+            fileReader.Close();
+            //}
+            //catch
+            //{
+            //    Debug.Log("Map data file was modified or corrupted, could not load.");
+            //}
         }
-    }
-
-    //TODO: Before final build, mapData.csv is created, then the final map data pass should be written to it.
-    //This file does not exist after a clean download, this function should only be run if the player has zero save data.
-    void InitializeMapFile()
-    {
-        string mapDataPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName +
-                             @"\Local\" + Application.productName + @"\mapData.csv";
-
-        StreamWriter fileWriter = File.CreateText(mapDataPath);
-
-        fileWriter.Write("");
-
-        fileWriter.Flush();
-        fileWriter.Close();
     }
 }

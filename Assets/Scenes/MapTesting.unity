@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileBackgrounds:
   - {fileID: 6671763751696806827, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
+  - {fileID: 6671763751696806827, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
   - {fileID: 5897663780777699550, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
   - {fileID: 1725904160941625423, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
   - {fileID: -214197132617669411, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
@@ -215,6 +216,8 @@ MonoBehaviour:
   - {fileID: 589494996439224302, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
   - {fileID: -6245310782717630643, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
   - {fileID: 5281232711635012721, guid: af42dc64be728684fa560b8a84e23a09, type: 3}
+  mapWidth: 10
+  mapHeight: 10
 --- !u!4 &1444413025
 Transform:
   m_ObjectHideFlags: 0
@@ -306,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010895798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.57, y: 30.96, z: -10}
+  m_LocalPosition: {x: 30, y: -30, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
