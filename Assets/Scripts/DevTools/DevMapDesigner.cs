@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.IO;
 using UnityEngine;
 
 public class DevMapDesigner : MonoBehaviour
@@ -17,8 +17,14 @@ public class DevMapDesigner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.U))
         {
+            UpdateMapData();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SerializeMapData();
             UpdateMapData();
         }
     }
@@ -46,5 +52,47 @@ public class DevMapDesigner : MonoBehaviour
                 mapCopy[i, k].spriteRenderer.sprite = MapController.instance.TileBackgrounds[mapCopy[i, k].background];
             }
         }
+    }
+
+    void SerializeMapData()
+    {
+        string mapDataPath = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName +
+                             @"\Local\" + Application.productName + @"\mapData.csv";
+        Debug.Log("Saving map data to file at " + mapDataPath);
+
+        StreamWriter fileWriter = File.CreateText(mapDataPath);
+
+        for (int i = 0; i < mapHeight; i++)
+        {
+            for (int k = 0; k < mapWidth; k++)
+            {
+                fileWriter.Write(GetSerializedTile(mapCopy[k, i]));
+            }
+            //Append a space to the end of each line, except the last
+            if (i < mapHeight - 1) fileWriter.Write('\n');
+        }
+
+        fileWriter.Flush();
+        fileWriter.Close();
+    }
+
+    string GetSerializedTile(DevMapTile tile)
+    {
+        string output = string.Empty;
+
+        //Append a 0 to the beginning of the tile background ID if single digit
+        if (tile.background < 10) output += "0" + tile.background.ToString();
+        else output += tile.background.ToString();
+
+        output += tile.discovered ? "1" : "0";
+
+        output += tile.doors.HasFlag(MapController.ExitDoor.Left) ? "1" : "0";
+        output += tile.doors.HasFlag(MapController.ExitDoor.Right) ? "1" : "0";
+        output += tile.doors.HasFlag(MapController.ExitDoor.Up) ? "1" : "0";
+        output += tile.doors.HasFlag(MapController.ExitDoor.Down) ? "1" : "0";
+
+        output += ",";
+
+        return output;
     }
 }
