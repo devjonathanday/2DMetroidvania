@@ -37,8 +37,12 @@ public class MapController : MonoBehaviour
     public List<Sprite> TileBackgrounds = new List<Sprite>();
     //ROW-MAJOR
     public MapTile[,] map;
+
     public int mapWidth = 0;
     public int mapHeight = 0;
+
+    public Sprite undiscoveredMapTile = null;
+    public Sprite discoveredMapTile = null;
 
     void Awake()
     {
@@ -143,7 +147,7 @@ public class MapController : MonoBehaviour
                 {
                     map[column, row] = new MapTile();
                     //Characters 0-1 represent the tile background index
-                    int backgroundID = int.Parse(new string(chunks[column][0], chunks[column][1]));
+                    int backgroundID = int.Parse(chunks[column].Substring(0, 2));
                     map[column, row].backgroundID = backgroundID;
                     //Character 2 represents discovered status (0 = false, 1 = true)
                     map[column, row].discovered = (chunks[column][2] == '0' ? false : true);

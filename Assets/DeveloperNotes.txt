@@ -1,0 +1,1 @@
+- Player settings should only enable even-numbered resolutions to prevent tearing between tiles.

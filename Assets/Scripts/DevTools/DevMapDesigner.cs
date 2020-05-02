@@ -51,7 +51,9 @@ public class DevMapDesigner : MonoBehaviour
         {
             for (int k = 0; k < mapHeight; k++) //Iterate through columns
             {
-                mapCopy[i, k].spriteRenderer.sprite = MapController.instance.TileBackgrounds[mapCopy[i, k].background];
+                mapCopy[i, k].background = MapController.instance.map[i, k].backgroundID;
+                mapCopy[i, k].spriteRenderer.sprite = MapController.instance.TileBackgrounds[MapController.instance.map[i, k].backgroundID];
+                mapCopy[i, k].doors = MapController.instance.map[i, k].doors;
             }
         }
     }
