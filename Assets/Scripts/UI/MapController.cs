@@ -5,10 +5,13 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+//MAP COORDINATES: Y+ IS DOWN---------------------------------------------------------------------------
+
 public class MapController : MonoBehaviour
 {
     public static MapController instance;
 
+    //ExitDoor refers to a map tile's doors used as bitmasks
     [Flags]
     public enum ExitDoor
     {
@@ -18,6 +21,9 @@ public class MapController : MonoBehaviour
         Up = 4, //0100
         Down = 8  //1000
     }
+
+    //MapDirection refers to the direction of a transition between tiles
+    public enum TransitionDirection { Left, Right, Up, Down }
 
     [System.Serializable]
     public class MapTile
@@ -41,8 +47,10 @@ public class MapController : MonoBehaviour
     public int mapWidth = 0;
     public int mapHeight = 0;
 
-    public Sprite undiscoveredMapTile = null;
-    public Sprite discoveredMapTile = null;
+    public Vector2 currentTile = Vector2.zero;
+
+    public Sprite undiscoveredTileSprite = null;
+    public Sprite discoveredTileSprite = null;
 
     void Awake()
     {
@@ -168,4 +176,26 @@ public class MapController : MonoBehaviour
             //}
         }
     }
+
+    /// <summary>
+    /// Returns the scene name of the map tile the player is transitioning to, given the direction.
+    /// </summary>
+    //public string GetNextSceneName(TransitionDirection direction)
+    //{
+    //    string result = string.Empty;
+    //    Vector2 nextTile = currentTile;
+
+    //    switch(direction)
+    //    {
+    //        case TransitionDirection.Left:  nextTile.x--; break;
+    //        case TransitionDirection.Right: nextTile.x++; break;
+    //        case TransitionDirection.Up:    nextTile.y--; break;
+    //        case TransitionDirection.Down:  nextTile.y++; break;
+    //    }
+
+    //    result += (nextTile.x < 10 ? "0" : "") + nextTile.x.ToString();
+    //    result += (nextTile.y < 10 ? "0" : "") + nextTile.y.ToString();
+
+    //    return result;
+    //}
 }

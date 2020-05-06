@@ -18,7 +18,6 @@ public class CameraControls : MonoBehaviour
 
     [Header("Gameplay Parameters")]
     [SerializeField] float positionLerp = 0;
-    [SerializeField] float minimumTranslation = 0;
     [SerializeField] Transform focus = null;
 
     [Header("Visuals")]

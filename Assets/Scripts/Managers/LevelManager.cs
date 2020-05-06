@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,12 +15,28 @@ public class LevelManager : MonoBehaviour
     [SerializeField] CameraControls cam = null;
     [SerializeField] float screenFadeDuration = 0;
 
+    [System.Serializable]
+    public class SpawnPoint
+    {
+        public string name;
+        public Transform spawnLocation;
+        public Vector3 cameraStartPos;
+        public MapController.TransitionDirection transitionDirection;
+    }
+
+    public SpawnPoint[] spawnPoints = null;
+
     void Awake()
     {
         //Assign self as static LevelManager instance
         if (instance == null) instance = this;
 
-        StartCoroutine(FadeIn());
+        FadeIn();
+    }
+
+    void Start()
+    {
+        PlayerManager.instance.facingRight = GameManager.instance.playerFacingRight;
     }
 
     void OnDrawGizmos()
@@ -36,7 +53,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public IEnumerator FadeIn()
+    IEnumerator FadeInCoroutine()
     {
         cam.FadeScreen(1);
 
@@ -49,8 +66,10 @@ public class LevelManager : MonoBehaviour
         cam.FadeScreen(0);
     }
 
-    public IEnumerator FadeOut()
+    IEnumerator FadeOutCoroutine(string queuedScene)
     {
+        GameManager.instance.playerFacingRight = PlayerManager.instance.facingRight;
+
         cam.FadeScreen(0);
 
         for (float t = 0; t < 1; t += Time.deltaTime / screenFadeDuration)
@@ -61,6 +80,15 @@ public class LevelManager : MonoBehaviour
 
         cam.FadeScreen(1);
 
-        //Transition to queued scene
+        SceneManager.LoadScene(queuedScene);
+    }
+
+    public void FadeIn()
+    {
+        StartCoroutine(FadeInCoroutine());
+    }
+    public void FadeOut(string queuedScene)
+    {
+        StartCoroutine(FadeOutCoroutine(queuedScene));
     }
 }

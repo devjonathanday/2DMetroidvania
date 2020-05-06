@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 50e4cc15f5351e744abd8fc2cd5dac98
+guid: 349db1bff52fbe34ca30a8257b3463ba
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,10 +8,11 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: GuardianModified
+  fontName: MetroidVania
   fontNames:
-  - GuardianModified
-  fallbackFontReferences: []
+  - MetroidVania
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7c180e1e15db4b74e8be78e364bce7ba, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

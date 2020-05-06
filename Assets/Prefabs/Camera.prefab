@@ -175,8 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e12883f1b4a16b4283973fd6b3bd90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredPosition: {x: 0, y: 0, z: 0}
   zPosition: -10
   size: {x: 320, y: 180}
+  decimalPrecision: 1
   positionLerp: 0.1
+  minimumTranslation: 0.1
   focus: {fileID: 0}
+  screenFader: {fileID: 0}

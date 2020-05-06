@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -670097205
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 8354177579141205369, guid: 3ef09d1b4b69cfc4da5a466eeab6ea07,
     type: 3}
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -670097205
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -6245731069278250971, guid: 3ef09d1b4b69cfc4da5a466eeab6ea07,
     type: 3}
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -670097205
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: -5852808904608255342, guid: fb3a1fd0607280d4ba0a2ffb66ec166d,
     type: 3}
@@ -348,7 +348,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -670097205
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -3236031030048926578, guid: 350b8f9f1c5aaa14b89aae25e031a72a,
     type: 3}
@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 2662600086513098744}
+  movementDeadzone: 0.5
   moveAcceleration: 20
   maxMoveSpeed: 2
   jumpForce: 5
@@ -468,6 +469,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 2662600086513098744}
   firePoint: {fileID: 8957215896814435702}
+  arm: {fileID: 5904321948805847972}
+  aimInput: {x: 0, y: 0}
+  aimAngle: 0
+  headSprite: {fileID: 5904321949868257880}
+  headUp: {fileID: 9014151813168422021, guid: 350b8f9f1c5aaa14b89aae25e031a72a, type: 3}
+  headForward: {fileID: -3236031030048926578, guid: 350b8f9f1c5aaa14b89aae25e031a72a,
+    type: 3}
+  headDown: {fileID: -8668805144726245221, guid: 350b8f9f1c5aaa14b89aae25e031a72a,
+    type: 3}
   bulletTypes:
   - name: Standard Bullet
     bulletPrefab: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
@@ -475,6 +485,8 @@ MonoBehaviour:
     speed: 10
     spawnOffset: 4
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
+    autoFire: 1
+    fireIncrement: 0.25
   currentBullet: 0
 --- !u!61 &7716442292158226336
 BoxCollider2D:
