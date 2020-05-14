@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     [Header("Physics")]
     [SerializeField] Rigidbody2D rBody = null;
-    [SerializeField] [ReadOnlyField] Vector2 velocity = Vector2.zero;
+    [ReadOnlyField] public Vector2 velocity = Vector2.zero;
     [SerializeField] ContactFilter2D contactFilter = new ContactFilter2D();
     //Cached array for containing hit results from RayCasts/BoxCasts
     RaycastHit2D[] castResults = new RaycastHit2D[1];
@@ -60,6 +60,13 @@ public class Bullet : MonoBehaviour
 
     void CheckSpecial(RaycastHit2D result)
     {
+        //Check if we hit a destructible, then attempt to destroy it
+        Destructible destructibleObject = result.collider.gameObject.GetComponent<Destructible>();
+        if (destructibleObject != null)
+        {
+            destructibleObject.DestroySelf();
+        }
+
         //Check if we hit a door, then attempt to open it
         Door doorHit = result.collider.gameObject.GetComponent<Door>();
         if (doorHit != null)

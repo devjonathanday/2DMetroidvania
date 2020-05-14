@@ -109,3 +109,20 @@ MonoBehaviour:
   bottomRightBounds: {fileID: 8142118928710850840}
   cam: {fileID: 0}
   screenFadeDuration: 0.5
+  spawnPoints:
+  - name: Left
+    spawnLocation: {fileID: 0}
+    cameraStartPos: {x: 0, y: 0, z: 0}
+    transitionDirection: 1
+  - name: Right
+    spawnLocation: {fileID: 0}
+    cameraStartPos: {x: 0, y: 0, z: 0}
+    transitionDirection: 0
+  - name: Up
+    spawnLocation: {fileID: 0}
+    cameraStartPos: {x: 0, y: 0, z: 0}
+    transitionDirection: 3
+  - name: Down
+    spawnLocation: {fileID: 0}
+    cameraStartPos: {x: 0, y: 0, z: 0}
+    transitionDirection: 2

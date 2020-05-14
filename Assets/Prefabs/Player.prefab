@@ -413,6 +413,11 @@ MonoBehaviour:
   facingRight: 1
   jumpSFX: {fileID: 8300000, guid: b9a64f9bc51ff974e9bd4398fc7d9d20, type: 3}
   landSFX: {fileID: 8300000, guid: 9c714222fcefdab40b8615de40daa170, type: 3}
+  doubleJumpSFX: {fileID: 8300000, guid: 5eb80f14d6c99d64ca837f268100c473, type: 3}
+  doubleJumpUnlocked: 0
+  doubleJumpEffectPrefab: {fileID: 2241293398277173774, guid: ccf644131ef976f4393bcc56c5a451b7,
+    type: 3}
+  doubleJumpUsed: 0
 --- !u!114 &7716442292158226338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +459,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   animator: {fileID: 7716442292254078097}
   sprite: {fileID: 7716442292254078103}
+  doubleJumpEffectOffset: {x: -1.5, y: 1, z: 0}
   landSFXMinVelocity: 1
 --- !u!114 &8957215897520465705
 MonoBehaviour:
@@ -487,7 +493,15 @@ MonoBehaviour:
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
     autoFire: 1
     fireIncrement: 0.25
-  currentBullet: 0
+  - name: Double Bullet
+    bulletPrefab: {fileID: 2750019271840520977, guid: dd3050539f818cd48b2ec320051b4d31,
+      type: 3}
+    speed: 10
+    spawnOffset: 4
+    shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
+    autoFire: 1
+    fireIncrement: 0.25
+  currentBullet: 1
 --- !u!61 &7716442292158226336
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -501,7 +515,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -512,7 +526,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8, y: 16}
+  m_Size: {x: 8, y: 15}
   m_EdgeRadius: 0
 --- !u!50 &7716442292158226339
 Rigidbody2D:

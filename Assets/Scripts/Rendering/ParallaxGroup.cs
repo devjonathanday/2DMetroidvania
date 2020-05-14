@@ -19,6 +19,7 @@ public class ParallaxGroup : MonoBehaviour
     void Awake()
     {
         InitializeBackgroundPositions();
+        UpdateBackgroundPositions();
     }
 
     void Update()

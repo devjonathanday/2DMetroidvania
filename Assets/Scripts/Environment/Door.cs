@@ -6,11 +6,20 @@ public class Door : MonoBehaviour
 {
     [SerializeField] Animator animator = null;
     [SerializeField] AudioClip openSFX = null;
-    [SerializeField] [ReadOnlyField] bool opened = false;
+    bool isOpen = false;
+    bool IsOpen
+    {
+        get { return isOpen; }
+        set
+        {
+            isOpen = value;
+            animator.SetBool("StartOpen", true);
+        }
+    }
 
     public void Open()
     {
-        if (!opened)
+        if (!IsOpen)
         {
             animator.SetTrigger("Open");
 
@@ -19,7 +28,12 @@ public class Door : MonoBehaviour
                 GlobalAudio.instance.PlayOneShot(openSFX);
             }
 
-            opened = true;
+            IsOpen = true;
         }
+    }
+
+    public void StartOpen()
+    {
+        IsOpen = true;
     }
 }

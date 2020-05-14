@@ -12,16 +12,15 @@ public class LevelManager : MonoBehaviour
     public Transform bottomRightBounds = null;
 
     [Header("Visuals")]
-    [SerializeField] CameraControls cam = null;
     [SerializeField] float screenFadeDuration = 0;
 
     [System.Serializable]
     public class SpawnPoint
     {
         public string name;
-        public Transform spawnLocation;
+        public Vector3 spawnLocation;
         public Vector3 cameraStartPos;
-        public MapController.TransitionDirection transitionDirection;
+        public Door door;
     }
 
     public SpawnPoint[] spawnPoints = null;
@@ -30,13 +29,13 @@ public class LevelManager : MonoBehaviour
     {
         //Assign self as static LevelManager instance
         if (instance == null) instance = this;
-
-        FadeIn();
     }
 
     void Start()
     {
         PlayerManager.instance.facingRight = GameManager.instance.playerFacingRight;
+
+        FadeIn();
     }
 
     void OnDrawGizmos()
@@ -55,30 +54,30 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator FadeInCoroutine()
     {
-        cam.FadeScreen(1);
+        CameraControls.instance.FadeScreen(1);
 
         for (float t = 1; t > 0; t -= Time.deltaTime / screenFadeDuration)
         {
-            cam.FadeScreen(t);
+            CameraControls.instance.FadeScreen(t);
             yield return null;
         }
 
-        cam.FadeScreen(0);
+        CameraControls.instance.FadeScreen(0);
     }
 
     IEnumerator FadeOutCoroutine(string queuedScene)
     {
         GameManager.instance.playerFacingRight = PlayerManager.instance.facingRight;
 
-        cam.FadeScreen(0);
+        CameraControls.instance.FadeScreen(0);
 
         for (float t = 0; t < 1; t += Time.deltaTime / screenFadeDuration)
         {
-            cam.FadeScreen(t);
+            CameraControls.instance.FadeScreen(t);
             yield return null;
         }
 
-        cam.FadeScreen(1);
+        CameraControls.instance.FadeScreen(1);
 
         SceneManager.LoadScene(queuedScene);
     }

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CameraControls : MonoBehaviour
 {
+    public static CameraControls instance;
+
     [Header("Reference Variables")]
     [SerializeField] float zPosition = 0;
     [Tooltip("The size of the camera in pixels, default is 320 x 180.")]
@@ -23,6 +25,11 @@ public class CameraControls : MonoBehaviour
     [Header("Visuals")]
     [SerializeField] RawImage screenFader = null;
     Color screenFaderColor = Color.black;
+
+    void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     void Start()
     {

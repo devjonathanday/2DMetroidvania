@@ -35,6 +35,7 @@ public class PlayerControls : MonoBehaviour
     [Header("Animation")]
     [SerializeField] Animator animator = null;
     [SerializeField] Transform sprite = null;
+    [SerializeField] Vector3 doubleJumpEffectOffset = Vector2.zero;
 
     [Header("Audio")]
     [SerializeField] float landSFXMinVelocity = 0;
@@ -48,11 +49,25 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         grounded = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.extents * 2, 0, Vector3.down, contactFilter, castResults, 1) > 0;
-
-        if (grounded && inputHandler.GetButtonDown("Jump"))
+        if (grounded)
         {
-            Jump();
-            jumpReleased = false;
+            playerManager.doubleJumpUsed = false;
+        }
+
+        if(inputHandler.GetButtonDown("Jump"))
+        {
+            Debug.Break();
+            if (grounded)
+            {
+                Jump(false);
+                jumpReleased = false;
+            }
+            else if (!playerManager.doubleJumpUsed && GameManager.instance.CheckUpgradeUnlocked("DoubleJump"))
+            {
+                Jump(true);
+                jumpReleased = false;
+                playerManager.doubleJumpUsed = true;
+            }
         }
         if (inputHandler.GetButtonUp("Jump") && !jumpReleased && velocity.y > 0)
         {
@@ -197,10 +212,19 @@ public class PlayerControls : MonoBehaviour
         velocity += force;
     }
 
-    void Jump()
+    void Jump(bool isDoubleJump)
     {
         velocity.y = jumpForce;
-        GlobalAudio.instance.PlayOneShot(playerManager.jumpSFX);
+        if(isDoubleJump)
+        {
+            GlobalAudio.instance.PlayOneShot(playerManager.doubleJumpSFX);
+            GameObject doubleJumpEffect = Instantiate(playerManager.doubleJumpEffectPrefab, sprite);
+            doubleJumpEffect.transform.localPosition = doubleJumpEffectOffset;
+        }
+        else
+        {
+            GlobalAudio.instance.PlayOneShot(playerManager.jumpSFX);
+        }
     }
 
     #endregion

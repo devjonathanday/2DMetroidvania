@@ -11,6 +11,24 @@ TextureImporter:
   - first:
       213: 7939985615287805931
     second: TEX_DoorButton_2
+  - first:
+      213: -8827777183386527468
+    second: TEX_DoorButton_0
+  - first:
+      213: 7430461399913186200
+    second: TEX_DoorButton_1
+  - first:
+      213: -5059834702764601129
+    second: TEX_DoorButton_2
+  - first:
+      213: -7245636432647006782
+    second: TEX_DoorButton_3
+  - first:
+      213: 1867344267514119213
+    second: TEX_DoorButton_4
+  - first:
+      213: 2421229319303738100
+    second: TEX_DoorButton_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -99,6 +117,69 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41992fb5c6f6d7580800000000000000
+      internalID: -8827777183386527468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TEX_DoorButton_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 893c313664d4e1760800000000000000
+      internalID: 7430461399913186200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TEX_DoorButton_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0958f552bd7c9b0800000000000000
+      internalID: -5059834702764601129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TEX_DoorButton_3
+      rect:
+        serializedVersion: 2
+        x: 1
         y: 1
         width: 6
         height: 6
@@ -109,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76e8e4f01ead9b700800000000000000
-      internalID: 556716689116270183
+      spriteID: 2c55274bd04527b90800000000000000
+      internalID: -7245636432647006782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TEX_DoorButton_1
+      name: TEX_DoorButton_4
       rect:
         serializedVersion: 2
         x: 8
@@ -130,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b754986436a814d00800000000000000
-      internalID: 955196754969052539
+      spriteID: d248a8ab7b32ae910800000000000000
+      internalID: 1867344267514119213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TEX_DoorButton_2
+      name: TEX_DoorButton_5
       rect:
         serializedVersion: 2
         x: 15
@@ -151,8 +232,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be7e0f869de703e60800000000000000
-      internalID: 7939985615287805931
+      spriteID: 4f23cd8dc3fe99120800000000000000
+      internalID: 2421229319303738100
       vertices: []
       indices: 
       edges: []

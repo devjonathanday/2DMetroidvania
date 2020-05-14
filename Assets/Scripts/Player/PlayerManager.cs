@@ -12,6 +12,12 @@ public class PlayerManager : MonoBehaviour
     [Header("Audio")]
     public AudioClip jumpSFX = null;
     public AudioClip landSFX = null;
+    public AudioClip doubleJumpSFX = null;
+
+    [Header("Abilities")]
+    public bool doubleJumpUnlocked;
+    public GameObject doubleJumpEffectPrefab = null;
+    public bool doubleJumpUsed = false;
 
     void Awake()
     {
