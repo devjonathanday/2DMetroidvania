@@ -56,7 +56,6 @@ public class PlayerControls : MonoBehaviour
 
         if(inputHandler.GetButtonDown("Jump"))
         {
-            Debug.Break();
             if (grounded)
             {
                 Jump(false);

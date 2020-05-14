@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [Header("Gameplay")]
     [SerializeField] LayerMask specialCollisionLayers = new LayerMask();
     [SerializeField] float lifeTime = 0;
+    [ReadOnlyField] public float damage = 0;
     float spawnTimestamp = 0;
 
     [Header("Physics")]
@@ -19,10 +20,11 @@ public class Bullet : MonoBehaviour
     [Header("Effects")]
     [SerializeField] GameObject destroyEffect = null;
 
-    public void Initialize(Vector2 _velocity)
+    public void Initialize(Vector2 _velocity, float _damage)
     {
         velocity = _velocity;
         spawnTimestamp = Time.time;
+        damage = _damage;
     }
 
     void Update()
@@ -51,7 +53,7 @@ public class Bullet : MonoBehaviour
             rBody.position = castResults[0].point;
 
             //If we hit an object that should react to the bullet
-            if(((1 << castResults[0].collider.gameObject.layer) & specialCollisionLayers) != 0)
+            if (((1 << castResults[0].collider.gameObject.layer) & specialCollisionLayers) != 0)
                 CheckSpecial(castResults[0]);
 
             Terminate();
@@ -61,10 +63,10 @@ public class Bullet : MonoBehaviour
     void CheckSpecial(RaycastHit2D result)
     {
         //Check if we hit a destructible, then attempt to destroy it
-        Destructible destructibleObject = result.collider.gameObject.GetComponent<Destructible>();
-        if (destructibleObject != null)
+        Destructible destructibleHit = result.collider.gameObject.GetComponent<Destructible>();
+        if (destructibleHit != null)
         {
-            destructibleObject.DestroySelf();
+            destructibleHit.DestroySelf();
         }
 
         //Check if we hit a door, then attempt to open it
@@ -72,6 +74,13 @@ public class Bullet : MonoBehaviour
         if (doorHit != null)
         {
             doorHit.Open();
+        }
+
+        //Check if we hit an enemy, then deal damage to it
+        Enemy enemyHit = result.collider.gameObject.GetComponent<Enemy>();
+        if(enemyHit != null)
+        {
+            enemyHit.TakeDamage(damage);
         }
     }
 

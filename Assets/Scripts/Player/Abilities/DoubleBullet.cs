@@ -11,7 +11,7 @@ public class DoubleBullet : Bullet
         for (int i = 0; i < subBullets.Length; i++)
         {
             Bullet newBullet = Instantiate(subBulletPrefab, subBullets[i].position, subBullets[i].rotation);
-            newBullet.Initialize(velocity);
+            newBullet.Initialize(velocity, damage);
         }
         Destroy(gameObject);
     }

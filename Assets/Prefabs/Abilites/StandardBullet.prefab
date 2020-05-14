@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 636589061
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: 2484318114415172858, guid: 5fa08aaa73f9bb74caa9937ff7fc7dcc,
     type: 3}
@@ -119,8 +119,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialCollisionLayers:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 10240
   lifeTime: 2
+  damage: 0
   rBody: {fileID: -8416678343666869606}
   velocity: {x: 0, y: 0}
   contactFilter:
@@ -132,7 +133,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 8704
+      m_Bits: 10752
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

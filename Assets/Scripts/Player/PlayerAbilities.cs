@@ -36,6 +36,7 @@ public class PlayerAbilities : MonoBehaviour
         public AudioClip shootSFX = null;
         public bool autoFire;
         public float fireIncrement;
+        public float damage;
     }
 
     void Awake()
@@ -92,7 +93,7 @@ public class PlayerAbilities : MonoBehaviour
                                                firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
                                                Quaternion.Euler(Vector3.forward * (Mathf.Rad2Deg * Mathf.Atan2(aimInput.y, aimInput.x))));
         //spawnedBullet.transform.localScale = firePoint.lossyScale;
-        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed);
+        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed, bulletTypes[currentBullet].damage);
         if (bulletTypes[currentBullet].shootSFX != null)
         {
             GlobalAudio.instance.PlayOneShot(bulletTypes[currentBullet].shootSFX);

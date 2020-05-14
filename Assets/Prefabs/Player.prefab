@@ -493,6 +493,7 @@ MonoBehaviour:
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
     autoFire: 1
     fireIncrement: 0.25
+    damage: 1
   - name: Double Bullet
     bulletPrefab: {fileID: 2750019271840520977, guid: dd3050539f818cd48b2ec320051b4d31,
       type: 3}
@@ -501,7 +502,8 @@ MonoBehaviour:
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
     autoFire: 1
     fireIncrement: 0.25
-  currentBullet: 1
+    damage: 2
+  currentBullet: 0
 --- !u!61 &7716442292158226336
 BoxCollider2D:
   m_ObjectHideFlags: 0
