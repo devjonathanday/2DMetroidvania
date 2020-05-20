@@ -15,9 +15,7 @@ public class StandardBot : Enemy
     //Used for physics
     [SerializeField] BoxCollider2D boxCollider = null;
     //Used for ground collision detection
-    [SerializeField] ContactFilter2D walkableContacts = new ContactFilter2D();
-    //Used for objects to trigger turning around
-    [SerializeField] ContactFilter2D turningContacts = new ContactFilter2D();
+    [SerializeField] ContactFilter2D contactFilter = new ContactFilter2D();
     [SerializeField] float gravity = 0;
     //Cached array for containing hit results from RayCasts/BoxCasts
     RaycastHit2D[] castResults = new RaycastHit2D[3];
@@ -51,7 +49,6 @@ public class StandardBot : Enemy
             moveSpeedParameter = speedReceiver.value;
             currentMoveSpeed = moveSpeedParameter * baseMoveSpeed;
         }
-        CheckTurnAround();
     }
 
     void FixedUpdate()
@@ -70,40 +67,28 @@ public class StandardBot : Enemy
     {
         //Ground Collision
         grounded = false;
-        if (Physics2D.BoxCast(boxCollider.bounds.center, (boxCollider.bounds.extents * 2), 0, Vector2.down, walkableContacts, castResults, Mathf.Abs(velocity.y)) > 0)
+        if (Physics2D.BoxCast(boxCollider.bounds.center, (boxCollider.bounds.extents * 2), 0, Vector2.down, contactFilter, castResults, Mathf.Abs(velocity.y)) > 0)
         {
             for (int i = 0; i < castResults.Length; i++)
             {
-                if (castResults[i])
+                if (castResults[i] && castResults[i].collider.gameObject != gameObject && castResults[i].point.y < transform.position.y)
                 {
-                    if (castResults[i].collider.gameObject != gameObject && castResults[i].point.y < transform.position.y)
-                    {
-                        rBody.position = new Vector2(rBody.position.x, castResults[i].point.y + boxCollider.bounds.extents.y);
-                        velocity.y = 0;
-                        grounded = true;
-                        break;
-                    }
+                    rBody.position = new Vector2(rBody.position.x, castResults[i].point.y + boxCollider.bounds.extents.y);
+                    velocity.y = 0;
+                    grounded = true;
+                    break;
                 }
             }
         }
-    }
-    void CheckTurnAround()
-    {
-        Debug.DrawRay(transform.position, transform.right * (transform.localScale.x) * (boxCollider.bounds.extents.x + Mathf.Abs(velocity.x)), Color.red);
         //Wall Collision/Turning
-        if (Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, turningContacts, castResults, boxCollider.bounds.extents.x + Mathf.Abs(velocity.x)) > 0)
+        if (Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, contactFilter, castResults, boxCollider.bounds.extents.x + Mathf.Abs(velocity.x)) > 0)
         {
             for (int i = 0; i < castResults.Length; i++)
             {
-                Debug.Log("Running forloop iteration " + i + ".");
-                if (castResults[i])
+                if (castResults[i] && castResults[i].collider.gameObject != gameObject)
                 {
-                    if (castResults[i].collider.gameObject != gameObject)
-                    {
-                        transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
-                        Debug.Log("Break!");
-                        break;
-                    }
+                    transform.localScale = new Vector3(transform.localScale.x * -1, 1, 1);
+                    break;
                 }
             }
         }

@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 6939027162992709159, guid: 600db726ba79a9f4981483ba7e09ba6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -40
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 6939027162992709159, guid: 600db726ba79a9f4981483ba7e09ba6a,
         type: 3}
@@ -1392,6 +1392,42 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: -27, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 9
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1
+  - first: {x: -21, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 6
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1
+  - first: {x: -15, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 5
+      m_TileSpriteIndex: 7
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1
+  - first: {x: -12, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 6
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1
   - first: {x: -31, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -2196,12 +2232,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 2c24a90ae819f8148a3b0f31ebfaa43a, type: 2}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: a8adf8ddbbaed344aac39773aca92a4c, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 35c34cc891425514d84e4456cade88ae, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 8d9d58db7718dbd4587d8470bf648039, type: 2}
   - m_RefCount: 103
@@ -2235,12 +2271,15 @@ Tilemap:
   - m_RefCount: 103
     m_Data: {fileID: -3229164682211411886, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 5373202919256744605, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
+      type: 3}
+  - m_RefCount: 2
+    m_Data: {fileID: 1240959811776881440, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
+      type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -8046684014471694312, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
+      type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1476044692223040785, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
       type: 3}
@@ -2263,7 +2302,7 @@ Tilemap:
     m_Data: {fileID: 8708393569997647660, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 154
+  - m_RefCount: 158
     m_Data:
       e00: 1
       e01: 0
@@ -2282,7 +2321,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 154
+  - m_RefCount: 158
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
@@ -2718,7 +2757,7 @@ PrefabInstance:
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
@@ -2911,7 +2950,7 @@ PrefabInstance:
     - target: {fileID: 6939027162992709159, guid: 600db726ba79a9f4981483ba7e09ba6a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -40
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 6939027162992709159, guid: 600db726ba79a9f4981483ba7e09ba6a,
         type: 3}
