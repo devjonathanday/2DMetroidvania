@@ -6,15 +6,12 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] Health health = null;
     [SerializeField] float hitEffectDuration = 0;
-    [SerializeField] Renderer selfRenderer = null;
-    Material selfMaterial = null;
+    Renderer[] selfRenderers = null;
 
-    void Start()
+    public void Start()
     {
-        selfRenderer = GetComponent<Renderer>();
-        selfMaterial = Instantiate(selfRenderer.material);
-        selfRenderer.material = selfMaterial;
-        selfMaterial.SetFloat("_HitEffect", 0);
+        selfRenderers = GetComponentsInChildren<Renderer>();
+        SetHitEffectRecursive(0);
 
         health = GetComponent<Health>();
         health.OnDeathEvent += Death;
@@ -23,18 +20,27 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(float amount)
     {
         health.TakeDamage(amount);
-        StopAllCoroutines();
+        StopCoroutine("HitEffect");
         StartCoroutine(HitEffect(hitEffectDuration));
+    }
+
+    void SetHitEffectRecursive(float amount)
+    {
+        for (int i = 0; i < selfRenderers.Length; i++)
+        {
+            selfRenderers[i].material.SetFloat("_HitEffect", amount);
+        }
     }
 
     IEnumerator HitEffect(float duration)
     {
+        SetHitEffectRecursive(1);
         for (float t = duration; t > 0; t -= Time.deltaTime)
         {
-            selfMaterial.SetFloat("_HitEffect", t / duration);
+            SetHitEffectRecursive(t / duration);
             yield return null;
         }
-        selfMaterial.SetFloat("_HitEffect", 0);
+        SetHitEffectRecursive(0);
     }
     public virtual void Death() { }
 }

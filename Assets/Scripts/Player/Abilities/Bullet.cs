@@ -20,11 +20,17 @@ public class Bullet : MonoBehaviour
     [Header("Effects")]
     [SerializeField] GameObject destroyEffect = null;
 
-    public void Initialize(Vector2 _velocity, float _damage)
+    [Header("Audio")]
+    public AudioClip shootSFX = null;
+    public AudioClip impactSFX = null;
+
+    public void Initialize(Vector2 _velocity, float _damage, AudioClip _shootSFX, AudioClip _impactSFX)
     {
         velocity = _velocity;
         spawnTimestamp = Time.time;
         damage = _damage;
+        shootSFX = _shootSFX;
+        impactSFX = _impactSFX;
     }
 
     void Update()
@@ -88,6 +94,9 @@ public class Bullet : MonoBehaviour
     {
         if(destroyEffect != null)
             Instantiate(destroyEffect, rBody.position, Quaternion.identity);
+
+        if(impactSFX != null)
+            GlobalAudio.instance.PlayOneShot(impactSFX);
 
         Destroy(gameObject);
     }

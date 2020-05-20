@@ -33,10 +33,11 @@ public class PlayerAbilities : MonoBehaviour
         public GameObject bulletPrefab = null;
         public float speed = 0;
         public float spawnOffset = 0;
+        public bool autoFire = false;
+        public float fireIncrement = 0;
+        public float damage = 0;
         public AudioClip shootSFX = null;
-        public bool autoFire;
-        public float fireIncrement;
-        public float damage;
+        public AudioClip impactSFX = null;
     }
 
     void Awake()
@@ -92,9 +93,11 @@ public class PlayerAbilities : MonoBehaviour
         GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab,
                                                firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
                                                Quaternion.Euler(Vector3.forward * (Mathf.Rad2Deg * Mathf.Atan2(aimInput.y, aimInput.x))));
-        //spawnedBullet.transform.localScale = firePoint.lossyScale;
-        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed, bulletTypes[currentBullet].damage);
-        if (bulletTypes[currentBullet].shootSFX != null)
+        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed,
+                                                        bulletTypes[currentBullet].damage,
+                                                        bulletTypes[currentBullet].shootSFX,
+                                                        bulletTypes[currentBullet].impactSFX);
+        if(bulletTypes[currentBullet].shootSFX != null)
         {
             GlobalAudio.instance.PlayOneShot(bulletTypes[currentBullet].shootSFX);
         }
