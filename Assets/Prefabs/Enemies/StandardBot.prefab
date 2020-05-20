@@ -367,7 +367,7 @@ MonoBehaviour:
   baseMoveSpeed: 20
   rBody: {fileID: 1285016062}
   boxCollider: {fileID: 6939027162992709156}
-  contactFilter:
+  walkableContacts:
     useTriggers: 0
     useLayerMask: 1
     useDepth: 0
@@ -381,10 +381,25 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  turningContacts:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 10752
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   gravity: 15
   destroyEffect: {fileID: 3780511544185321221, guid: bfe2e7729f1fb324ba9ccf2d0c2e6cd6,
     type: 3}
   deathScreenShake: {x: 1, y: 0.5}
+  takeDamageSFX: {fileID: 0}
 --- !u!61 &6939027162992709156
 BoxCollider2D:
   m_ObjectHideFlags: 0
