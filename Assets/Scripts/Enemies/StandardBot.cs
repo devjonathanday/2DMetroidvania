@@ -20,12 +20,13 @@ public class StandardBot : Enemy
     //Cached array for containing hit results from RayCasts/BoxCasts
     RaycastHit2D[] castResults = new RaycastHit2D[3];
     Vector2 velocity = Vector2.zero;
-    bool grounded;
+    bool grounded = false;
 
     [Header("Visuals")]
     [SerializeField] GameObject destroyEffect = null;
     [Tooltip("X = Intensity, Y = Duration")]
     [SerializeField] Vector2 deathScreenShake = Vector2.zero;
+    [SerializeField] Animator animator = null;
 
     [Header("Audio")]
     [SerializeField] AudioClip takeDamageSFX = null;
@@ -44,7 +45,7 @@ public class StandardBot : Enemy
     }
     void UpdateMoveSpeed()
     {
-        if (grounded)
+        if (grounded && speedReceiver != null)
         {
             moveSpeedParameter = speedReceiver.value;
             currentMoveSpeed = moveSpeedParameter * baseMoveSpeed;
@@ -53,10 +54,13 @@ public class StandardBot : Enemy
 
     void FixedUpdate()
     {
-        ApplyLocomotion();
-        ApplyConstraints();
+        if (isVisible)
+        {
+            ApplyLocomotion();
+            ApplyConstraints();
 
-        rBody.position += velocity;
+            rBody.position += velocity;
+        }
     }
     void ApplyLocomotion()
     {
@@ -65,6 +69,8 @@ public class StandardBot : Enemy
     }
     void ApplyConstraints()
     {
+        bool wasGrounded = grounded;
+
         //Ground Collision
         grounded = false;
         if (Physics2D.BoxCast(boxCollider.bounds.center, (boxCollider.bounds.extents * 2), 0, Vector2.down, contactFilter, castResults, Mathf.Abs(velocity.y)) > 0)
@@ -80,6 +86,9 @@ public class StandardBot : Enemy
                 }
             }
         }
+
+        if(wasGrounded != grounded) animator.SetBool("Grounded", grounded);
+
         //Wall Collision/Turning
         if (Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, contactFilter, castResults, boxCollider.bounds.extents.x + Mathf.Abs(velocity.x)) > 0)
         {

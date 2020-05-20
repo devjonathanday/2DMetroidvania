@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Health health = null;
     [SerializeField] float hitEffectDuration = 0;
     Renderer[] selfRenderers = null;
+    protected bool isVisible = false;
 
     public void Start()
     {
@@ -15,6 +16,20 @@ public class Enemy : MonoBehaviour
 
         health = GetComponent<Health>();
         health.OnDeathEvent += Death;
+    }
+
+    void Update()
+    {
+        isVisible = false;
+
+        for (int i = 0; i < selfRenderers.Length; i++)
+        {
+            if(selfRenderers[i].isVisible)
+            {
+                isVisible = true;
+                break;
+            }
+        }
     }
 
     public virtual void TakeDamage(float amount)

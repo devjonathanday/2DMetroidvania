@@ -10,4 +10,9 @@ public class AnimationSender : MonoBehaviour
     {
         receiver.UpdateValue(value);
     }
+
+    public void TriggerReceiver()
+    {
+        receiver.OnTrigger();
+    }
 }

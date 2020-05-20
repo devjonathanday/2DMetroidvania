@@ -24,6 +24,14 @@ public class Bullet : MonoBehaviour
     public AudioClip shootSFX = null;
     public AudioClip impactSFX = null;
 
+    Renderer[] selfRenderers = null;
+    bool isVisible;
+
+    void Start()
+    {
+        selfRenderers = GetComponentsInChildren<Renderer>();
+    }
+
     public void Initialize(Vector2 _velocity, float _damage, AudioClip _shootSFX, AudioClip _impactSFX)
     {
         velocity = _velocity;
@@ -39,6 +47,19 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        isVisible = false;
+
+        for (int i = 0; i < selfRenderers.Length; i++)
+        {
+            if (selfRenderers[i].isVisible)
+            {
+                isVisible = true;
+                break;
+            }
+        }
+
+        if (!isVisible) Destroy(gameObject);
     }
 
     void FixedUpdate()

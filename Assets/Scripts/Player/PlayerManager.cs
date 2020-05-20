@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     public AudioClip jumpSFX = null;
     public AudioClip landSFX = null;
     public AudioClip doubleJumpSFX = null;
+    public AudioClip footstepSFX = null;
+    public AnimationReceiver footstepReceiver = null;
 
     [Header("Abilities")]
     public bool doubleJumpUnlocked;
@@ -21,6 +23,17 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null) instance = this;
+    }
+    void Start()
+    {
+        if (footstepSFX != null && footstepReceiver != null)
+        {
+            footstepReceiver.OnTrigger += PlayFootstepSFX;
+        }
+    }
+    void PlayFootstepSFX()
+    {
+        GlobalAudio.instance.PlayOneShot(footstepSFX);
     }
 }

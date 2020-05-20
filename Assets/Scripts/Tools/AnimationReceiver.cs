@@ -16,4 +16,5 @@ public class AnimationReceiver : MonoBehaviour
     public delegate void AnimationReceiverEvent();
 
     public AnimationReceiverEvent OnValueChanged;
+    public AnimationReceiverEvent OnTrigger;
 }

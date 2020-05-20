@@ -385,6 +385,7 @@ MonoBehaviour:
   destroyEffect: {fileID: 3780511544185321221, guid: bfe2e7729f1fb324ba9ccf2d0c2e6cd6,
     type: 3}
   deathScreenShake: {x: 1, y: 0.5}
+  animator: {fileID: 2084869324}
   takeDamageSFX: {fileID: 8300000, guid: b4980a0aaeba6e6438ab1b8555890a30, type: 3}
 --- !u!61 &6939027162992709156
 BoxCollider2D:
