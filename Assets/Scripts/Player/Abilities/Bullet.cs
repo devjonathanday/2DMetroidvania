@@ -104,7 +104,7 @@ public class Bullet : MonoBehaviour
         }
 
         //Check if we hit an enemy, then deal damage to it
-        Enemy enemyHit = result.collider.gameObject.GetComponent<Enemy>();
+        Enemy enemyHit = result.collider.gameObject.GetComponentInParent<Enemy>();
         if(enemyHit != null)
         {
             enemyHit.TakeDamage(damage);

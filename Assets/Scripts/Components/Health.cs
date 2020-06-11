@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float maxHealth;
+    [ReadOnlyField] public bool dead = false;
 
     [SerializeField] [ReadOnlyField] float currentHealth;
     public float CurrentHealth
@@ -14,9 +15,10 @@ public class Health : MonoBehaviour
         {
             currentHealth = value;
 
-            if(currentHealth <= 0)
+            if(!dead && currentHealth <= 0)
             {
                 OnDeathEvent.Invoke();
+                dead = true;
             }
             if(currentHealth > maxHealth)
             {

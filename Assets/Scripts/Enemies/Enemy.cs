@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Health health = null;
+    [SerializeField] protected Health health = null;
     [SerializeField] float hitEffectDuration = 0;
     Renderer[] selfRenderers = null;
     protected bool isVisible = false;
@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
         health.OnDeathEvent += Death;
     }
 
-    void Update()
+    public void Update()
     {
         isVisible = false;
 

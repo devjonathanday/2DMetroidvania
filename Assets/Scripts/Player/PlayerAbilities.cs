@@ -48,9 +48,9 @@ public class PlayerAbilities : MonoBehaviour
 
     void Update()
     {
-        aimInput.x = inputHandler.GetAxis("AimX");
-        aimInput.y = inputHandler.GetAxis("AimY");
-        aimInput.Normalize();
+        aimInput.x = Mathf.RoundToInt(inputHandler.GetAxis("AimX"));
+        aimInput.y = Mathf.RoundToInt(inputHandler.GetAxis("AimY"));
+        //aimInput.Normalize();
 
         Aim();
 

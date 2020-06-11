@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
             footstepReceiver.OnTrigger += PlayFootstepSFX;
         }
     }
+
     void PlayFootstepSFX()
     {
         GlobalAudio.instance.PlayOneShot(footstepSFX);

@@ -4043,6 +4043,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2662600086513098744, guid: 77ef66fe817a73d47b475f859f4021e2,
+        type: 3}
+      propertyPath: footstepSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c714222fcefdab40b8615de40daa170, type: 3}
+    - target: {fileID: 2662600086513098744, guid: 77ef66fe817a73d47b475f859f4021e2,
+        type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 067f0a4470ff29a4ebbad78470f8ebe0, type: 3}
+    - target: {fileID: 2662600086513098744, guid: 77ef66fe817a73d47b475f859f4021e2,
+        type: 3}
+      propertyPath: jumpSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 091f2039b2c048149953b8a19cfffb48, type: 3}
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
       propertyPath: m_LocalPosition.x

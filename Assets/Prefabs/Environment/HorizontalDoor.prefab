@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3983451444035792088}
   openSFX: {fileID: 8300000, guid: 3a4d3bf57ab3daf489a336af095d7d00, type: 3}
+  closeSFX: {fileID: 8300000, guid: 422f145bae6b35445a1e4b4980497b03, type: 3}
 --- !u!61 &7786651699354922222
 BoxCollider2D:
   m_ObjectHideFlags: 0

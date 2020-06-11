@@ -7,10 +7,10 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" "IgnoreProjector" = "True"}
         LOD 100
 
-        Blend SrcAlpha OneMinusSrcAlpha
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		ZWrite off
 		Cull off
@@ -55,7 +55,9 @@
             {
                 // sample the texture
                 fixed4 sample = tex2D(_MainTex, i.uv);
-                fixed4 col = sample + (step(sample.r + sample.g + sample.b, _HitEffect * 3) * float4(1, 1, 1, sample.a));
+				// return a white pixel or original color based on _HitEffect
+				fixed4 finalColor = sample + (step(sample.r + sample.g + sample.b, _HitEffect * 3) * float4(1, 1, 1, 1));
+                fixed4 col = float4(finalColor.r, finalColor.g, finalColor.b, sample.a);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;

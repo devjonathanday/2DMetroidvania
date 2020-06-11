@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 9e7116d24fc10b14583414b8b52d331a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: MetroidVania
+  fontNames:
+  - MetroidVania
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 349db1bff52fbe34ca30a8257b3463ba, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
