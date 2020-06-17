@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
-    totalSpriteSurfaceArea: 6144
+    totalSpriteSurfaceArea: 6656
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -67,6 +67,8 @@ SpriteAtlas:
   - {fileID: 248560325499764990, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
   - {fileID: 2906859892117705224, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
   - {fileID: -8078817052095464363, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
+  - {fileID: 4499163655836664398, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
+  - {fileID: 2560841517440208049, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
   - {fileID: 3721262697336482890, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
   - {fileID: -2095981622651709425, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
   - {fileID: 2004172660594921726, guid: 266ffcfd6dd94ac4b976ecfc5b3de50e, type: 3}
@@ -92,6 +94,8 @@ SpriteAtlas:
   - TILE_Gravel_3
   - TILE_Gravel_0
   - TILE_Gravel_1
+  - TILE_Gravel_24
+  - TILE_Gravel_25
   - TILE_Gravel_20
   - TILE_Gravel_21
   - TILE_Gravel_22

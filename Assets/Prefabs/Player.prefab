@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 7716442292158226336}
   - component: {fileID: 7716442292158226339}
   - component: {fileID: 5904321949837790612}
+  - component: {fileID: 5904321949837790610}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -412,10 +413,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jumpSFX: {fileID: 8300000, guid: b9a64f9bc51ff974e9bd4398fc7d9d20, type: 3}
-  landSFX: {fileID: 8300000, guid: 9c714222fcefdab40b8615de40daa170, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 091f2039b2c048149953b8a19cfffb48, type: 3}
+  landSFX: {fileID: 8300000, guid: 067f0a4470ff29a4ebbad78470f8ebe0, type: 3}
   doubleJumpSFX: {fileID: 8300000, guid: 5eb80f14d6c99d64ca837f268100c473, type: 3}
-  footstepSFX: {fileID: 8300000, guid: 067f0a4470ff29a4ebbad78470f8ebe0, type: 3}
+  footstepRandomizer: {fileID: 5904321949837790610}
   footstepReceiver: {fileID: 5904321949837790612}
   doubleJumpUnlocked: 0
   doubleJumpEffectPrefab: {fileID: 2241293398277173774, guid: ccf644131ef976f4393bcc56c5a451b7,
@@ -570,6 +571,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueName: FootstepSFX
   value: 0
+--- !u!114 &5904321949837790610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716442292158226343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e477d6795e945a947afbca961b29d0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 0d29e3d33fc32fc438be760ba3fad3a8, type: 3}
+  - {fileID: 8300000, guid: b7c9067bc01e6d741ba551efeb4e6e62, type: 3}
+  - {fileID: 8300000, guid: 17e46b01fd57ba3498d890a8560a904a, type: 3}
+  - {fileID: 8300000, guid: 6c1db811decffeb488072dc31b1bfbe5, type: 3}
 --- !u!1 &7716442292254078102
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,11 +13,10 @@ public class PlayerManager : MonoBehaviour
     public AudioClip jumpSFX = null;
     public AudioClip landSFX = null;
     public AudioClip doubleJumpSFX = null;
-    public AudioClip footstepSFX = null;
-    public AnimationReceiver footstepReceiver = null;
+    [SerializeField] AudioRandomizer footstepRandomizer = null;
+    [SerializeField] AnimationReceiver footstepReceiver = null;
 
     [Header("Abilities")]
-    public bool doubleJumpUnlocked;
     public GameObject doubleJumpEffectPrefab = null;
     public bool doubleJumpUsed = false;
 
@@ -27,7 +26,7 @@ public class PlayerManager : MonoBehaviour
     }
     void Start()
     {
-        if (footstepSFX != null && footstepReceiver != null)
+        if (footstepRandomizer != null && footstepReceiver != null)
         {
             footstepReceiver.OnTrigger += PlayFootstepSFX;
         }
@@ -35,6 +34,6 @@ public class PlayerManager : MonoBehaviour
 
     void PlayFootstepSFX()
     {
-        GlobalAudio.instance.PlayOneShot(footstepSFX);
+        footstepRandomizer.PlayOneShot();
     }
 }
