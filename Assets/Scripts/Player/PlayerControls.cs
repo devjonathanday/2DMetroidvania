@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerControls : MonoBehaviour
     Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
     //Parameters that the player cares about, directly affects user experience
-    [Header("Gameplay Parameters")]
+    [Header("Gameplay")]
     [SerializeField] float moveAcceleration = 0;
     [SerializeField] float maxMoveSpeed = 0;
     [SerializeField] float jumpForce = 0;
@@ -17,6 +18,7 @@ public class PlayerControls : MonoBehaviour
     [Tooltip("Buffer on each side of each BoxCast to smooth out collision detection.")]
     [SerializeField] float cornerCollisionBuffer = 0;
     bool jumpReleased = true;
+    [SerializeField] Health healthComponent = null;
 
     //Affects the physics response to other objects
     [Header("Physics")]
@@ -36,6 +38,18 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] Animator animator = null;
     [SerializeField] Transform sprite = null;
     [SerializeField] Vector3 doubleJumpEffectOffset = Vector2.zero;
+    [SerializeField] bool invincible = false;
+    bool Invincible
+    {
+        get { return invincible; }
+        set
+        {
+            invincible = value;
+            sprite.gameObject.SetActive(true);
+        }
+
+    }
+    [SerializeField] float iFrameDuration = 0;
 
     [Header("Audio")]
     [SerializeField] float landSFXMinVelocity = 0;
@@ -235,6 +249,29 @@ public class PlayerControls : MonoBehaviour
         animator.SetFloat("SpeedX", Mathf.Abs(velocity.x));
         animator.SetFloat("SpeedY", velocity.y);
         animator.SetBool("Grounded", grounded);
+    }
+
+    IEnumerator IFrameSequence()
+    {
+        for (float t = iFrameDuration; t > 0; t -= Time.deltaTime)
+        {
+            sprite.gameObject.SetActive(!sprite.gameObject.activeSelf);
+            yield return null;
+        }
+        sprite.gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    #region Health
+
+    void TakeDamage(float damage)
+    {
+        if(!invincible)
+        {
+            healthComponent.TakeDamage(damage);
+            StartCoroutine(IFrameSequence());
+        }
     }
 
     #endregion
