@@ -17,7 +17,6 @@ public class LevelManager : MonoBehaviour
     [System.Serializable]
     public class SpawnPoint
     {
-        public string name;
         public Vector3 spawnLocation;
         public Vector3 cameraStartPos;
         public Door door;

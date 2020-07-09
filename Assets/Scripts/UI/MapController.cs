@@ -22,9 +22,6 @@ public class MapController : MonoBehaviour
         Down = 8  //1000
     }
 
-    //MapDirection refers to the direction of a transition between tiles
-    public enum TransitionDirection { Left, Right, Up, Down }
-
     [System.Serializable]
     public class MapTile
     {

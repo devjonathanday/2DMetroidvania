@@ -1,1 +1,7 @@
+PROJECT SETTINGS
 - Player settings should only enable even-numbered resolutions to prevent tearing between tiles.
+
+MAP FUNCTIONALITY
+- Spawn Points are contained on the Level Manager, starting from the uppermost door on the left wall, then going in a clockwise circle.
+- The array containing the spawn points MUST be in the correct order to load properly.
+- Destination Index is contained on the door, references the spawn point index in the next room to spawn from.

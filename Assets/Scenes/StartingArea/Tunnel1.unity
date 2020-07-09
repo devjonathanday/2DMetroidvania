@@ -638,6 +638,11 @@ PrefabInstance:
       propertyPath: queuedSceneName
       value: StartingArea
       objectReference: {fileID: 0}
+    - target: {fileID: 6115602722938970270, guid: f76ab56faa4230045b7d2f2ac5354ac9,
+        type: 3}
+      propertyPath: destinationIndex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f76ab56faa4230045b7d2f2ac5354ac9, type: 3}
 --- !u!1 &1862566371
@@ -4676,12 +4681,12 @@ PrefabInstance:
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -464
+      value: -224
       objectReference: {fileID: 0}
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -48
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7716442292158226337, guid: 77ef66fe817a73d47b475f859f4021e2,
         type: 3}
@@ -5018,43 +5023,73 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
       propertyPath: spawnPoints.Array.data[1].spawnLocation.x
-      value: -464
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[1].spawnLocation.y
-      value: -48
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[1].cameraStartPos.x
-      value: -328
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[1].door
       value: 
-      objectReference: {fileID: 6577420998813466679}
+      objectReference: {fileID: 1143942142}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].spawnLocation.x
-      value: 128
+      value: -464
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].spawnLocation.y
-      value: 16
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].door
       value: 
-      objectReference: {fileID: 1143942142}
+      objectReference: {fileID: 6577420998813466679}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].cameraStartPos.x
+      value: -328
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0].spawnIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].spawnLocation.x
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].spawnLocation.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].cameraStartPos.x
       value: -8
       objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].door
+      value: 
+      objectReference: {fileID: 1143942142}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a, type: 3}

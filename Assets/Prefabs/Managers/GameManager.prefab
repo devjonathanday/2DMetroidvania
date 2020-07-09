@@ -62,5 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5358d0d8ffd113a4eb6c9819d102c9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionDirection: 3
+  playerHealth: {fileID: 0}
+  destinationIndex: 0
   playerFacingRight: 1
+  spawnFromLoadGame: 1
+  upgrades:
+  - name: DoubleJump
+    unlocked: 1

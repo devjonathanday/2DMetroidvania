@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     public Health playerHealth = null;
 
-    public MapController.TransitionDirection transitionDirection;
+    public int destinationIndex = 0;
     public bool playerFacingRight = true;
+    public bool spawnFromLoadGame = true;
 
     Scene currentScene;
 
@@ -58,11 +59,16 @@ public class GameManager : MonoBehaviour
 
     void Initialize()
     {
+        if(spawnFromLoadGame)
+        {
+            spawnFromLoadGame = false;
+            return;
+        }
         PlayerManager.instance.facingRight = playerFacingRight;
-        PlayerManager.instance.transform.position = LevelManager.instance.spawnPoints[(int)transitionDirection].spawnLocation;
-        CameraControls.instance.transform.position = LevelManager.instance.spawnPoints[(int)transitionDirection].cameraStartPos;
+        PlayerManager.instance.transform.position = LevelManager.instance.spawnPoints[destinationIndex].spawnLocation;
+        CameraControls.instance.transform.position = LevelManager.instance.spawnPoints[destinationIndex].cameraStartPos;
 
-        Door entryDoor = LevelManager.instance.spawnPoints[(int)transitionDirection].door;
+        Door entryDoor = LevelManager.instance.spawnPoints[destinationIndex].door;
         if (entryDoor != null) entryDoor.StartOpen();
     }
 

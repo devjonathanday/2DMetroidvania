@@ -3799,21 +3799,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1765040799642706848, guid: fe3e282497c753442a58e9645618f4f5,
-        type: 3}
-      propertyPath: upgrades.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765040799642706848, guid: fe3e282497c753442a58e9645618f4f5,
-        type: 3}
-      propertyPath: upgrades.Array.data[0].name
-      value: DoubleJump
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765040799642706848, guid: fe3e282497c753442a58e9645618f4f5,
-        type: 3}
-      propertyPath: upgrades.Array.data[0].unlocked
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1765040799642706849, guid: fe3e282497c753442a58e9645618f4f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4406,6 +4391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194231}
@@ -4427,22 +4417,77 @@ PrefabInstance:
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].spawnLocation.x
-      value: 128
+      value: -464
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].spawnLocation.y
-      value: -48
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].cameraStartPos.x
-      value: -8
+      value: -328
       objectReference: {fileID: 0}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[0].door
       value: 
       objectReference: {fileID: 210691144}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].destinationIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0].destinationIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0].spawnIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].spawnIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].spawnLocation.x
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].spawnLocation.y
+      value: -48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].cameraStartPos.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].door
+      value: 
+      objectReference: {fileID: 210691144}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].spawnLocation.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].spawnLocation.y
+      value: -48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].cameraStartPos.x
+      value: -120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a, type: 3}
