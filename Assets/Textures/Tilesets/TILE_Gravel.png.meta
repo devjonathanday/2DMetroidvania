@@ -644,32 +644,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TILE_Gravel_20
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 18
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4c27a605b494a330800000000000000
-      internalID: 3721262697336482890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: TILE_Gravel_21
       rect:
         serializedVersion: 2
         x: 18
-        y: 18
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -689,7 +668,7 @@ TextureImporter:
       name: TILE_Gravel_22
       rect:
         serializedVersion: 2
-        x: 1
+        x: 35
         y: 1
         width: 16
         height: 16
@@ -710,7 +689,7 @@ TextureImporter:
       name: TILE_Gravel_23
       rect:
         serializedVersion: 2
-        x: 18
+        x: 52
         y: 1
         width: 16
         height: 16
@@ -736,7 +715,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -757,7 +736,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

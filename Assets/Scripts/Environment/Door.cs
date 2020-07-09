@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     [SerializeField] AudioClip openSFX = null;
     [SerializeField] AudioClip closeSFX = null;
     bool isOpen = false;
+    [SerializeField] int doorPower = 0;
     bool IsOpen
     {
         get { return isOpen; }
@@ -18,18 +19,21 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void Open()
+    public void Open(int power)
     {
-        if (!IsOpen)
+        if (doorPower == 0 || power == doorPower)
         {
-            animator.SetTrigger("Open");
-
-            if (openSFX != null)
+            if (!IsOpen)
             {
-                GlobalAudio.instance.PlayOneShot(openSFX);
-            }
+                animator.SetTrigger("Open");
 
-            IsOpen = true;
+                if (openSFX != null)
+                {
+                    GlobalAudio.instance.PlayOneShot(openSFX);
+                }
+
+                IsOpen = true;
+            }
         }
     }
 

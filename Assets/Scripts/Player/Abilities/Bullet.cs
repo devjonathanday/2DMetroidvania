@@ -100,7 +100,7 @@ public class Bullet : MonoBehaviour
         Door doorHit = result.collider.gameObject.GetComponent<Door>();
         if (doorHit != null)
         {
-            doorHit.Open();
+            doorHit.Open(0);
         }
 
         //Check if we hit an enemy, then deal damage to it

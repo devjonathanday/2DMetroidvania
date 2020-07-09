@@ -418,7 +418,6 @@ MonoBehaviour:
   doubleJumpSFX: {fileID: 8300000, guid: 5eb80f14d6c99d64ca837f268100c473, type: 3}
   footstepRandomizer: {fileID: 5904321949837790610}
   footstepReceiver: {fileID: 5904321949837790612}
-  doubleJumpUnlocked: 0
   doubleJumpEffectPrefab: {fileID: 2241293398277173774, guid: ccf644131ef976f4393bcc56c5a451b7,
     type: 3}
   doubleJumpUsed: 0
@@ -438,7 +437,7 @@ MonoBehaviour:
   movementDeadzone: 0.5
   moveAcceleration: 20
   maxMoveSpeed: 2
-  jumpForce: 5
+  jumpForce: 5.25
   gravity: 15
   cornerCollisionBuffer: 2
   rBody: {fileID: 7716442292158226339}
@@ -464,6 +463,8 @@ MonoBehaviour:
   animator: {fileID: 7716442292254078097}
   sprite: {fileID: 7716442292254078103}
   doubleJumpEffectOffset: {x: -1.5, y: 1, z: 0}
+  invincible: 0
+  iFrameDuration: 0
   landSFXMinVelocity: 1
 --- !u!114 &8957215897520465705
 MonoBehaviour:
@@ -488,9 +489,9 @@ MonoBehaviour:
     type: 3}
   headDown: {fileID: -8668805144726245221, guid: 350b8f9f1c5aaa14b89aae25e031a72a,
     type: 3}
-  bulletTypes:
+  weaponTypes:
   - name: Standard Bullet
-    bulletPrefab: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
+    prefab: {fileID: 2283097091526267710, guid: 87b8f8b9b504c0a4685bf4ad0b99ef7a,
       type: 3}
     speed: 10
     spawnOffset: 4
@@ -499,8 +500,9 @@ MonoBehaviour:
     damage: 1
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
     impactSFX: {fileID: 0}
+    spawnTorque: 0
   - name: Double Bullet
-    bulletPrefab: {fileID: 2750019271840520977, guid: dd3050539f818cd48b2ec320051b4d31,
+    prefab: {fileID: 2750019271840520977, guid: dd3050539f818cd48b2ec320051b4d31,
       type: 3}
     speed: 10
     spawnOffset: 4
@@ -509,7 +511,19 @@ MonoBehaviour:
     damage: 2
     shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
     impactSFX: {fileID: 0}
-  currentBullet: 0
+    spawnTorque: 0
+  - name: Electric Grenade
+    prefab: {fileID: 2284962666900942688, guid: 7ab632a415c01164089984c97c82e417,
+      type: 3}
+    speed: 100000
+    spawnOffset: 4
+    autoFire: 0
+    fireIncrement: 0.5
+    damage: 0
+    shootSFX: {fileID: 8300000, guid: 2d8719f803810be43bb8301c88838165, type: 3}
+    impactSFX: {fileID: 0}
+    spawnTorque: 10000
+  currentWeapon: 0
 --- !u!61 &7716442292158226336
 BoxCollider2D:
   m_ObjectHideFlags: 0

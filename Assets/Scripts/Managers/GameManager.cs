@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
+    public Health playerHealth = null;
+
     public MapController.TransitionDirection transitionDirection;
     public bool playerFacingRight = true;
 

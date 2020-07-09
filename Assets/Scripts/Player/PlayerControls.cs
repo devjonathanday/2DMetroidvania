@@ -18,7 +18,6 @@ public class PlayerControls : MonoBehaviour
     [Tooltip("Buffer on each side of each BoxCast to smooth out collision detection.")]
     [SerializeField] float cornerCollisionBuffer = 0;
     bool jumpReleased = true;
-    [SerializeField] Health healthComponent = null;
 
     //Affects the physics response to other objects
     [Header("Physics")]
@@ -269,7 +268,7 @@ public class PlayerControls : MonoBehaviour
     {
         if(!invincible)
         {
-            healthComponent.TakeDamage(damage);
+            GameManager.instance.playerHealth.TakeDamage(damage);
             StartCoroutine(IFrameSequence());
         }
     }

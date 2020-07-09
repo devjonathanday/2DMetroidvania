@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartingArea/Tunnel4.unity
     guid: a088f8787b3c8d74da55f1882af56309
+  - enabled: 1
+    path: Assets/Scenes/StartingArea/Tunnel5.unity
+    guid: c5088c823de71a34582db2d456545956
   m_configObjects: {}

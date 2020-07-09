@@ -22,15 +22,15 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] Sprite headDown = null;
 
     [Header("Abilities")]
-    [SerializeField] BulletType[] bulletTypes = new BulletType[1];
-    [SerializeField] int currentBullet = 0;
+    [SerializeField] WeaponType[] weaponTypes = new WeaponType[1];
+    [SerializeField] int currentWeapon = 0;
     float fireTimestamp;
 
     [System.Serializable]
-    public class BulletType
+    public class WeaponType
     {
         public string name = null;
-        public GameObject bulletPrefab = null;
+        public GameObject prefab = null;
         public float speed = 0;
         public float spawnOffset = 0;
         public bool autoFire = false;
@@ -38,6 +38,7 @@ public class PlayerAbilities : MonoBehaviour
         public float damage = 0;
         public AudioClip shootSFX = null;
         public AudioClip impactSFX = null;
+        public float spawnTorque = 0;
     }
 
     void Awake()
@@ -54,10 +55,10 @@ public class PlayerAbilities : MonoBehaviour
 
         Aim();
 
-        if (Time.time - fireTimestamp > bulletTypes[currentBullet].fireIncrement)
+        if (Time.time - fireTimestamp > weaponTypes[currentWeapon].fireIncrement)
         {
-            if (bulletTypes[currentBullet].autoFire && inputHandler.GetButton("Shoot") ||
-                !bulletTypes[currentBullet].autoFire && inputHandler.GetButtonDown("Shoot"))
+            if (weaponTypes[currentWeapon].autoFire && inputHandler.GetButton("Shoot") ||
+                !weaponTypes[currentWeapon].autoFire && inputHandler.GetButtonDown("Shoot"))
             {
                 Shoot();
                 fireTimestamp = Time.time;
@@ -90,16 +91,25 @@ public class PlayerAbilities : MonoBehaviour
 
     void Shoot()
     {
-        GameObject spawnedBullet = Instantiate(bulletTypes[currentBullet].bulletPrefab,
-                                               firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].spawnOffset),
+        GameObject spawnedBullet = Instantiate(weaponTypes[currentWeapon].prefab,
+                                               firePoint.position + (firePoint.right * (playerManager.facingRight ? 1 : -1) * weaponTypes[currentWeapon].spawnOffset),
                                                Quaternion.Euler(Vector3.forward * (Mathf.Rad2Deg * Mathf.Atan2(aimInput.y, aimInput.x))));
-        spawnedBullet.GetComponent<Bullet>().Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * bulletTypes[currentBullet].speed,
-                                                        bulletTypes[currentBullet].damage,
-                                                        bulletTypes[currentBullet].shootSFX,
-                                                        bulletTypes[currentBullet].impactSFX);
-        if(bulletTypes[currentBullet].shootSFX != null)
+        Bullet bulletComponent = spawnedBullet.GetComponent<Bullet>();
+        if (bulletComponent != null)
         {
-            GlobalAudio.instance.PlayOneShot(bulletTypes[currentBullet].shootSFX);
+            bulletComponent.Initialize(firePoint.right * (playerManager.facingRight ? 1 : -1) * weaponTypes[currentWeapon].speed,
+                                                          weaponTypes[currentWeapon].damage,
+                                                          weaponTypes[currentWeapon].shootSFX,
+                                                          weaponTypes[currentWeapon].impactSFX);
+        }
+        else
+        {
+            spawnedBullet.GetComponent<Rigidbody2D>().AddForce(aimInput * weaponTypes[currentWeapon].speed);
+            spawnedBullet.GetComponent<Rigidbody2D>().AddTorque(playerManager.facingRight ? -weaponTypes[currentWeapon].spawnTorque : weaponTypes[currentWeapon].spawnTorque);
+        }
+        if(weaponTypes[currentWeapon].shootSFX != null)
+        {
+            GlobalAudio.instance.PlayOneShot(weaponTypes[currentWeapon].shootSFX);
         }
     }
 
