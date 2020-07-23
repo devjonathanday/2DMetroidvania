@@ -384,6 +384,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637089618c8e2584b8961b8c736e1faa, type: 3}
+--- !u!114 &1143942142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7809964564949967347, guid: 637089618c8e2584b8961b8c736e1faa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1143942141}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc3fe27faa67694690d42831f48d875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229828824
 GameObject:
   m_ObjectHideFlags: 0
@@ -3859,6 +3871,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1765040799642706855, guid: fe3e282497c753442a58e9645618f4f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe3e282497c753442a58e9645618f4f5, type: 3}
 --- !u!1001 &3347492513455577190
@@ -4433,7 +4450,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPoints.Array.data[0].door
       value: 
-      objectReference: {fileID: 210691144}
+      objectReference: {fileID: 1143942142}
     - target: {fileID: 8142118929116374301, guid: 8a74adcb2a0c0f84bbb05516b4f16f1a,
         type: 3}
       propertyPath: spawnPoints.Array.data[1].destinationIndex
