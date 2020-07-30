@@ -7,7 +7,6 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Input")]
     [SerializeField] float movementDeadzone = 0;
-    Rewired.Player inputHandler = null; //Represents a player to which a controller is assigned
 
     //Parameters that the player cares about, directly affects user experience
     [Header("Gameplay")]
@@ -53,12 +52,6 @@ public class PlayerControls : MonoBehaviour
     [Header("Audio")]
     [SerializeField] float landSFXMinVelocity = 0;
 
-    void Awake()
-    {
-        //Assigns the main input handler to player 0, since there will only be one player
-        inputHandler = Rewired.ReInput.players.GetPlayer(0);
-    }
-
     void Update()
     {
         grounded = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.extents * 2, 0, Vector3.down, contactFilter, castResults, 1) > 0;
@@ -67,7 +60,7 @@ public class PlayerControls : MonoBehaviour
             playerManager.doubleJumpUsed = false;
         }
 
-        if(inputHandler.GetButtonDown("Jump"))
+        if(InputHandler.instance.player.GetButtonDown("Jump"))
         {
             if (grounded)
             {
@@ -81,19 +74,19 @@ public class PlayerControls : MonoBehaviour
                 playerManager.doubleJumpUsed = true;
             }
         }
-        if (inputHandler.GetButtonUp("Jump") && !jumpReleased && velocity.y > 0)
+        if (InputHandler.instance.player.GetButtonUp("Jump") && !jumpReleased && velocity.y > 0)
         {
             velocity.y /= 2;
             jumpReleased = true;
         }
 
         //If we are not aiming
-        if (inputHandler.GetAxis("AimX") == 0 && inputHandler.GetAxis("AimY") == 0)
+        if (InputHandler.instance.player.GetAxis("AimX") == 0 && InputHandler.instance.player.GetAxis("AimY") == 0)
         {
             //Aim the player based on their movement instead
-            if (inputHandler.GetAxis("Move") < -movementDeadzone)
+            if (InputHandler.instance.player.GetAxis("Move") < -movementDeadzone)
                 playerManager.facingRight = false;
-            if (inputHandler.GetAxis("Move") > movementDeadzone)
+            if (InputHandler.instance.player.GetAxis("Move") > movementDeadzone)
                 playerManager.facingRight = true;
         }
 
@@ -118,7 +111,7 @@ public class PlayerControls : MonoBehaviour
     {
         velocity.y -= gravity * Time.deltaTime;
 
-        if ((!inputHandler.GetButton("Stabilize") || !grounded) && Mathf.Abs(inputHandler.GetAxis("Move")) > movementDeadzone)
+        if ((!InputHandler.instance.player.GetButton("Stabilize") || !grounded) && Mathf.Abs(InputHandler.instance.player.GetAxis("Move")) > movementDeadzone)
         {
             Move();
         }
@@ -131,7 +124,7 @@ public class PlayerControls : MonoBehaviour
             velocity.y = -terminalVelocity;
 
         //Slow down the player if they are on the ground and not pressing anything, or if they are trying to stabilize
-        if (grounded && (Mathf.Abs(inputHandler.GetAxis("Move")) < movementDeadzone || inputHandler.GetButton("Stabilize")))
+        if (grounded && (Mathf.Abs(InputHandler.instance.player.GetAxis("Move")) < movementDeadzone || InputHandler.instance.player.GetButton("Stabilize")))
             velocity.x *= groundDrag;
 
         //Max horizontal movement speed
@@ -216,7 +209,7 @@ public class PlayerControls : MonoBehaviour
 
     void Move()
     {
-        velocity.x += inputHandler.GetAxis("Move") * moveAcceleration * Time.deltaTime;
+        velocity.x += InputHandler.instance.player.GetAxis("Move") * moveAcceleration * Time.deltaTime;
     }
 
     public void AddForce(Vector2 force)
